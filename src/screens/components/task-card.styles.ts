@@ -20,15 +20,15 @@ export const TaskCardStyles = StyleSheet.create({
     taskTitle: {
         flex:1,
         color: ColorPalete.NAVY_BLUE,
-        fontSize: 18,
+        fontSize: 19,
         fontWeight: 'bold',
-        marginBottom: 5
+        marginBottom: 2
     },
     taskDueDate:{
         color: ColorPalete.ORANGE_DARK,
-        fontSize: 16,
-        fontWeight: '600',
-        marginBottom: 5
+        fontSize: 15,
+        fontWeight: '500',
+        marginBottom: 4
     },
     taskDescription:{
         color: ColorPalete.GREY_DARK,
