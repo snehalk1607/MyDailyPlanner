@@ -24,7 +24,7 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
-import { ViewTaskList } from './src/screens/view-tasklist.screen';
+import { ViewTaskList } from './src/view-task-list/view-tasklist.screen';
 
 type SectionProps = PropsWithChildren<{
   title: string;
