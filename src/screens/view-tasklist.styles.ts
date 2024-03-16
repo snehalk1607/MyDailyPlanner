@@ -7,7 +7,7 @@ export const viewTaskListStyles =
         rootView: {
             flex:1,
             backgroundColor: 'white',
-            margin: 10
+            marginHorizontal: 0
         },
         header:{            
         backgroundColor: ColorPallete.BLUE,           
@@ -37,6 +37,12 @@ export const viewTaskListStyles =
             fontWeight: '500',
             paddingVertical: 12,
             color: ColorPallete.GREY
+        }, 
+        addNewTaskText:{
+            fontSize: 18,
+            color: ColorPallete.WHITE,
+            fontWeight: '500',
+            paddingVertical: 8
         }
         
 

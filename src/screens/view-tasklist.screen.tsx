@@ -1,26 +1,26 @@
 import React from 'react';
-import { View, Text, Image, Button, TouchableOpacity } from 'react-native';
+import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { viewTaskListStyles } from './view-tasklist.styles';
 import { TaskListImage } from '../../assets';
-import { ColorPallete } from './constants/color-pallete';
+import { LabelsResource } from './constants/labels';
 
 
 export const ViewTaskList = () => {
 
     const HeaderComponent = () => {
         return (
-            <View style={viewTaskListStyles.header}>
-            <Text style={viewTaskListStyles.headerText}>{'Hello Marta,'}</Text>
-            <Text style={[viewTaskListStyles.headerText, {textAlign:'center'}]}>{'Welcome to your planner!'}</Text>        
+            <View style={viewTaskListStyles.header}>     
+            <Text style={viewTaskListStyles.headerText}>{LabelsResource.TASKLIST_HEADER_USER}</Text>
+            <Text style={[viewTaskListStyles.headerText, {textAlign:'center'}]}>{LabelsResource.TASKLIST_HEADER_WELCOME_TEXT}</Text>        
             </View>
         )
     };
 
     const AddNewTaskButton = () => {
         return (
-             <View style={viewTaskListStyles.footer}>
-               <Button title={'Add New Task'} onPress={() => ''} color={ColorPallete.WHITE}></Button>
-            </View>
+             <TouchableOpacity style={viewTaskListStyles.footer}>
+                <Text style={viewTaskListStyles.addNewTaskText}>{LabelsResource.TASKLIST_ADD_TASK_BUTTON}</Text>
+            </TouchableOpacity>
            
         )
     };
@@ -28,8 +28,8 @@ export const ViewTaskList = () => {
     const EmptyList = () => {
         return (
             <View style={viewTaskListStyles.emptyListView}>
-                <Image source={TaskListImage} resizeMode='cover'/>
-                <Text style={viewTaskListStyles.emptyListText}>{"Let's start planning.."}</Text>
+                <Image source={TaskListImage}/>
+                <Text style={viewTaskListStyles.emptyListText}>{LabelsResource.TASKLIST_NO_TASKS}</Text>
             </View>
         )
     }

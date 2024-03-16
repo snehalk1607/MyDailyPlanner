@@ -64,11 +64,7 @@ function App(): React.JSX.Element {
   };
 
   return (
-    <SafeAreaView style={[backgroundStyle, {flex:1}]}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
+    <SafeAreaView style={{ backgroundColor:'#0077B6', flex:1}}>
       <ViewTaskList />
     </SafeAreaView>
   );
