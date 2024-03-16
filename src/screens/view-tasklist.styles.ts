@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native"
-import { ColorPallete } from "./constants/color-pallete";
+import { ColorPalete } from "../../constants/color-palete";
 
 
 export const viewTaskListStyles =
@@ -7,15 +7,16 @@ export const viewTaskListStyles =
         rootView: {
             flex:1,
             backgroundColor: 'white',
-            marginHorizontal: 0
         },
         header:{            
-        backgroundColor: ColorPallete.BLUE,           
+        backgroundColor: ColorPalete.BLUE,
+        paddingTop: 8         
         },
         headerText:{
         fontSize: 18, 
-        margin: 10,
-        color: ColorPallete.WHITE,
+        marginLeft: 15,
+        marginBottom:12,
+        color: ColorPalete.WHITE,
         fontWeight:'600'
         },
         footer:{
@@ -24,7 +25,7 @@ export const viewTaskListStyles =
         right:12,
         position:'absolute',
         borderRadius: 8,
-        backgroundColor:ColorPallete.ORANGE_BUTTON,
+        backgroundColor:ColorPalete.ORANGE_BUTTON,
         alignItems:'center'
         },
         emptyListView:{
@@ -36,11 +37,11 @@ export const viewTaskListStyles =
             fontSize: 15,
             fontWeight: '500',
             paddingVertical: 12,
-            color: ColorPallete.GREY
+            color: ColorPalete.GREY
         }, 
         addNewTaskText:{
             fontSize: 18,
-            color: ColorPallete.WHITE,
+            color: ColorPalete.WHITE,
             fontWeight: '500',
             paddingVertical: 8
         }

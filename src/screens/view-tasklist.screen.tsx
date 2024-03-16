@@ -1,8 +1,9 @@
 import React from 'react';
-import { View, Text, Image, TouchableOpacity } from 'react-native';
+import { View, Text, Image, TouchableOpacity, FlatList } from 'react-native';
 import { viewTaskListStyles } from './view-tasklist.styles';
 import { TaskListImage } from '../../assets';
-import { LabelsResource } from './constants/labels';
+import { LabelsResource } from '../../constants/labels-resource';
+import { TaskCard } from './components/task-card.component';
 
 
 export const ViewTaskList = () => {
@@ -37,7 +38,11 @@ export const ViewTaskList = () => {
     return (
         <View style={viewTaskListStyles.rootView}>
             {HeaderComponent()}
-            {EmptyList()}
+            {/* {EmptyList()} */}
+           
+
+            <FlatList renderItem={() => <TaskCard/>} data={[ {title : 'test title'}]}></FlatList>
+           
             {AddNewTaskButton()}
         </View>
     )
