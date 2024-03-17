@@ -1,11 +1,11 @@
 import React from 'react';
 import { View, Text, Image, TouchableOpacity, FlatList } from 'react-native';
 import { viewTaskListStyles } from './view-tasklist.styles';
-import { TaskListImage } from '../../assets';
-import { LabelsResource } from '../../constants/labels-resource';
+import { TaskListImage } from '../../../assets';
+import { LabelsResource } from '../../../constants/labels-resource';
 import { TaskCard } from './components/task-card.component';
 import { useNavigation } from '@react-navigation/native';
-import { ROOT_NAVIGATOR_SCREENS } from '../router.enum';
+import { ROOT_NAVIGATOR_SCREENS } from '../../router.enum';
 
 
 export const ViewTaskList = () => {

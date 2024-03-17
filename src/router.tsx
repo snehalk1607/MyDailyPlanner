@@ -1,6 +1,6 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import { ViewTaskList } from './view-task-list/view-tasklist.screen';
+import { ViewTaskList } from './screens/view-task-list/view-tasklist.screen';
 import { AddOrEditTask } from './screens/add-new-task/add-edit-task.screen';
 import { NativeStackView } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';

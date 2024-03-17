@@ -3,7 +3,7 @@ import {Image, Text, TouchableOpacity, View } from 'react-native';
 import { TaskCardStyles } from './task-card.styles';
 import React from 'react';
 import { CustomCheckBox } from './checkbox.component';
-import { EditIcon } from '../../../assets';
+import { EditIcon } from '../../../../assets';
 
 
 export const TaskCard = (props) => {

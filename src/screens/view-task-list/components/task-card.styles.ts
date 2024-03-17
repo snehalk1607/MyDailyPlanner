@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { ColorPalete } from "../../../constants/color-palete";
+import { ColorPalete } from "../../../../constants/color-palete";
 
 export const TaskCardStyles = StyleSheet.create({
     cardRootView :{

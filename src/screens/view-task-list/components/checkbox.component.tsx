@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, View, Image, TouchableOpacity } from 'react-native';
-import { CheckedCheckBox, UnCheckedCheckBox } from '../../../assets';
-import { ColorPalete } from '../../../constants/color-palete';
+import { CheckedCheckBox, UnCheckedCheckBox } from '../../../../assets';
+import { ColorPalete } from '../../../../constants/color-palete';
 
 export const CustomCheckBox = () => {
     const [checked, setChecked] = React.useState<boolean>(false);
