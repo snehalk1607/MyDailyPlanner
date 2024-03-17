@@ -1,6 +1,7 @@
 import { Formik } from 'formik';
 import React, { useState } from 'react';
 import { Button, TextInput, TouchableOpacity } from 'react-native';
+import { useDispatch } from 'react-redux';
 import { Text, View } from 'react-native';
 import { CustomDatePicker, CustomDropDown, CustomTextInput, FieldLabel } from './components/form-components';
 import { AddOrEditTaskStyles } from './add-edit-task.styles';
@@ -9,6 +10,7 @@ import { PRIORITY_LEVELS } from './add-edit-task.types';
 import * as Yup from 'yup';
 import Toast from 'react-native-toast-message';
 import { useNavigation } from '@react-navigation/native';
+import { ADD_TASK } from '../../store/action.types';
 
 const validationSchema = Yup.object().shape({
     title: Yup.string().required('Please fill this field'),
@@ -21,6 +23,7 @@ const validationSchema = Yup.object().shape({
 export const AddOrEditTask = () => {
     const styles = AddOrEditTaskStyles; 
     const navigate = useNavigation();
+    const dispatch = useDispatch();
 
     return ( 
     <View style={styles.rootView}>
@@ -29,9 +32,12 @@ export const AddOrEditTask = () => {
     initialValues={{title: '', description: '', dueDate: new Date(), priority: PRIORITY_LEVELS.MEDIUM}}
     validationSchema={validationSchema}
     onSubmit={values => {
-        console.log('values', values);
+        dispatch({
+          type: ADD_TASK,
+          payload: {...values}
+        });
         Toast.show({ type: 'success', text1: 'Task Added Successfully', position: 'bottom', bottomOffset: 70})
-        //navigate.goBack();
+        navigate.goBack();
       }}>
     {({handleSubmit, errors,  handleChange, values, setFieldValue, touched }) => (
       <View style={{flex:1}}>

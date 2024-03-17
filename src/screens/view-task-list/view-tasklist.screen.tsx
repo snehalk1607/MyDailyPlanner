@@ -1,15 +1,23 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, Image, TouchableOpacity, FlatList } from 'react-native';
+import { useSelector } from 'react-redux';
 import { viewTaskListStyles } from './view-tasklist.styles';
 import { TaskListImage } from '../../../assets';
 import { LabelsResource } from '../../../constants/labels-resource';
 import { TaskCard } from './components/task-card.component';
 import { useNavigation } from '@react-navigation/native';
 import { ROOT_NAVIGATOR_SCREENS } from '../../router.enum';
+import { store } from '../../store/store';
 
 
 export const ViewTaskList = () => {
     const navigation = useNavigation();
+    const [taskList, setTaskList] = useState([]);
+    const list = useSelector(() => store.getState().taskList);
+
+    useEffect(() => {
+        setTaskList(list);
+    },[list]);
 
     const HeaderComponent = () => {
         return (
@@ -41,7 +49,7 @@ export const ViewTaskList = () => {
     return (
         <View style={viewTaskListStyles.rootView}>
             {HeaderComponent()}          
-            <FlatList renderItem={() => <TaskCard/>} data={[{title: 'title'}]} ListEmptyComponent={() => EmptyList()}></FlatList>          
+            <FlatList data={taskList} renderItem={({item}) => <TaskCard task={item}/>}  ListEmptyComponent={() => EmptyList()}></FlatList>          
             {AddNewTaskButton()}
         </View>
     )

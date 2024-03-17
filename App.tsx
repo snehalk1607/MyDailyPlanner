@@ -7,42 +7,24 @@
 
 import React from 'react';
 import type {PropsWithChildren} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+import {SafeAreaView,StyleSheet} from 'react-native';
+import { Provider } from 'react-redux'
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-import { ViewTaskList } from './src/screens/view-task-list/view-tasklist.screen';
-import { NavigationContainer } from '@react-navigation/native';
 import { RootRouter } from './src/router';
+import { store } from './src/store/store';
 
 type SectionProps = PropsWithChildren<{
   title: string;
 }>;
 
 function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: 'white',
-  };
-
   return (
-    <SafeAreaView style={{ backgroundColor:'#0077B6', flex:1}}>
-       <RootRouter/>    
+    <Provider store= {store}>
+    <SafeAreaView style={{ backgroundColor:'#0077B6', flex:1}}>     
+       <RootRouter/>       
     </SafeAreaView>
+    </Provider>   
+
   );
 }
 
