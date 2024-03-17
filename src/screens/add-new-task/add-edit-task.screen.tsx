@@ -1,34 +1,56 @@
 import { Formik } from 'formik';
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, TextInput, TouchableOpacity } from 'react-native';
 import { Text, View } from 'react-native';
 import { CustomDatePicker, CustomDropDown, CustomTextInput, FieldLabel } from './components/form-components';
 import { AddOrEditTaskStyles } from './add-edit-task.styles';
-import { ColorPalete } from '../../../constants/color-palete';
+import { LabelsResource } from '../../../constants/labels-resource';
+import { PRIORITY_LEVELS } from './add-edit-task.types';
+import * as Yup from 'yup';
+
+const validationSchema = Yup.object().shape({
+    title: Yup.string().required('Please fill this field'),
+    description: Yup.string().min(3, 'Enter Description'),
+    dueDate: Yup.date().required('Please fill this field'),
+    priority: Yup.string().required('Please fill this field')
+});
+
 
 export const AddOrEditTask = () => {
     const styles = AddOrEditTaskStyles; 
+
     return ( 
-    <View style={{flex:1, marginVertical: 30, marginHorizontal: 15, justifyContent:'center',  }}>
-    <Text style={{alignSelf:'center', fontSize: 20, color: ColorPalete.ORANGE_DARK, fontWeight: 'bold', marginBottom: 18}}>{'Add New Task'}</Text>
-    <Formik           
-    initialValues={{ email: '' }}
-    onSubmit={values => console.log(values)}>
-    {({ handleChange, handleBlur, handleSubmit, values }) => (
+    <View style={styles.rootView}>
+    <Text style={styles.screenHeading}>{LabelsResource.TASKLIST_ADD_EDIT_SCREEN_HEADING}</Text>
+    <Formik        
+    initialValues={{title: '', description: '', dueDate: new Date(), priority: PRIORITY_LEVELS.MEDIUM}}
+    validationSchema={validationSchema}
+    onSubmit={values => {
+        console.log('values', values);
+      }}>
+    {({handleSubmit, errors,  handleChange, values, setFieldValue }) => (
       <View style={{flex:1}}>
-        <FieldLabel title={'Enter Title'} required />
-        <CustomTextInput/>
-        <FieldLabel title={'Enter Description'} />
-        <CustomTextInput />
+        
+        <FieldLabel title={LabelsResource.TASKLIST_ADD_EDIT_SCREEN_TASK_TITLE} required />
+        <TextInput  style={styles.textInput} value={values.title}  onChangeText={handleChange('title')}></TextInput>
+       {errors.title && <Text style={styles.errorText}>{errors.title}</Text>}
+        
+        <FieldLabel title={LabelsResource.TASKLIST_ADD_EDIT_SCREEN_TASK_DESCRIPTION} />
+        <TextInput  style={styles.textInput} value={values.description}  onChangeText={handleChange('description')}></TextInput>
+        {errors.description && <Text style={styles.errorText}>{errors.description}</Text>}
+
         <View style={{flexDirection:'row'}}>
-        <FieldLabel title={'Select Due Date'} required/>
-        <CustomDatePicker />
+        <FieldLabel title={LabelsResource.TASKLIST_ADD_EDIT_SCREEN_DUE_DATE} required/>
+        <CustomDatePicker value={values.dueDate} onChange = { (date: string) => setFieldValue('dueDate', date)}/>
         </View>
-        <FieldLabel title={'Select Priority'} />
-        <CustomDropDown />
-        <TouchableOpacity style={styles.footer} onPress={() => ''} >
-                <Text style={styles.addNewTaskText}>{'Add Task'}</Text>
-            </TouchableOpacity>
+        
+        <FieldLabel title={LabelsResource.TASKLIST_ADD_EDIT_SCREEN_PRIORITY} />
+        <CustomDropDown value={values.priority} onChange = {(priority: PRIORITY_LEVELS) => setFieldValue('priority', priority)}/>
+        
+        <TouchableOpacity style={styles.footer} onPress={() => handleSubmit()} >       
+        <Text style={styles.addNewTaskText}>{LabelsResource.TASKLIST_ADD_EDIT_SCREEN_SUBMIT}</Text>
+        </TouchableOpacity>
+
       </View>
     )}
   </Formik> 

@@ -4,6 +4,7 @@ import { FormComponentsStyles } from './form-components.styles';
 import { ColorPalete } from '../../../../constants/color-palete';
 import RNDateTimePicker from '@react-native-community/datetimepicker';
 import { SelectList } from 'react-native-dropdown-select-list';
+import { PRIORITY_LEVELS } from '../add-edit-task.types';
 
 
 const styles = FormComponentsStyles;
@@ -22,35 +23,39 @@ export const CustomTextInput = (props) => {
     const styles = FormComponentsStyles;
     return (        
         <TextInput style={[styles.textInput]} {...props}></TextInput>        
-    )
+    );
 }
 
-export const CustomDatePicker = () => {
+export const CustomDatePicker = (props) => {
+    const {value, onChange} = props;
     return ( 
        
         <RNDateTimePicker
         mode={'date'}
+        minimumDate={new Date('2023-01-01')}
         aria-modal = {true}
-        style={{marginLeft: 18, marginBottom: 12}}
+        style={{marginLeft: 18, marginBottom: 14}}
         collapsable={true}
-        value={new Date()}
+        value={value}
+        onChange={(_, selectedDate) => onChange(selectedDate)}
         />   
                
     );
 }
 
-export const CustomDropDown = () => {
+export const CustomDropDown = (props) => {
+    const {value, onChange} = props;
     const data = [
-        {key: 1, value:'High'},
-        {key: 2, value:'Medium'},
-        {key: 3, value:'Low'}]
+        {key: PRIORITY_LEVELS.HIGH, value:PRIORITY_LEVELS.HIGH},
+        {key: PRIORITY_LEVELS.MEDIUM, value:PRIORITY_LEVELS.MEDIUM},
+        {key: PRIORITY_LEVELS.LOW, value:PRIORITY_LEVELS.LOW}]
     return (
         <SelectList 
-        setSelected={() => ''} 
         dropdownTextStyles={styles.dropDownList}
         inputStyles={styles.dropDownList}
-        data={data} 
-        defaultOption={{key: 2, value:'Medium'}}
+        setSelected={(priority: PRIORITY_LEVELS) => onChange(priority) }
+        data={data}
+        defaultOption={{key: 2, value: PRIORITY_LEVELS.MEDIUM}}
     />
-    )
+    );
 }
