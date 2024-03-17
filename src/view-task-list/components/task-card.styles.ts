@@ -8,7 +8,6 @@ export const TaskCardStyles = StyleSheet.create({
         borderRadius: 12,
         shadowColor: ColorPalete.GREY,
         elevation: 15,
-        flex:1,
         shadowRadius: 12,
         shadowOpacity: 0.4
     }, 

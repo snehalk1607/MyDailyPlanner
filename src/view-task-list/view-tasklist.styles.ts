@@ -30,8 +30,10 @@ export const viewTaskListStyles =
         },
         emptyListView:{
             alignItems:'center', 
-            alignSelf:'center', 
-            top: '30%'
+            marginTop: '50%'
+            //alignContent : 'center'
+            //alignSelf:'center', 
+            
         },
         emptyListText:{
             fontSize: 15,

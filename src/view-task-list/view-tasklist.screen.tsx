@@ -4,9 +4,12 @@ import { viewTaskListStyles } from './view-tasklist.styles';
 import { TaskListImage } from '../../assets';
 import { LabelsResource } from '../../constants/labels-resource';
 import { TaskCard } from './components/task-card.component';
+import { useNavigation } from '@react-navigation/native';
+import { ROOT_NAVIGATOR_SCREENS } from '../router.enum';
 
 
 export const ViewTaskList = () => {
+    const navigation = useNavigation();
 
     const HeaderComponent = () => {
         return (
@@ -19,7 +22,7 @@ export const ViewTaskList = () => {
 
     const AddNewTaskButton = () => {
         return (
-             <TouchableOpacity style={viewTaskListStyles.footer}>
+             <TouchableOpacity style={viewTaskListStyles.footer} onPress={() => navigation.navigate(ROOT_NAVIGATOR_SCREENS.ADD_EDIT_TASK)} >
                 <Text style={viewTaskListStyles.addNewTaskText}>{LabelsResource.TASKLIST_ADD_TASK_BUTTON}</Text>
             </TouchableOpacity>
            
@@ -37,12 +40,8 @@ export const ViewTaskList = () => {
     
     return (
         <View style={viewTaskListStyles.rootView}>
-            {HeaderComponent()}
-            {/* {EmptyList()} */}
-           
-
-            <FlatList renderItem={() => <TaskCard/>} data={[ {title : 'test title'}]}></FlatList>
-           
+            {HeaderComponent()}          
+            <FlatList renderItem={() => <TaskCard/>} data={[{title: 'title'}]} ListEmptyComponent={() => EmptyList()}></FlatList>          
             {AddNewTaskButton()}
         </View>
     )

@@ -25,6 +25,8 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 import { ViewTaskList } from './src/view-task-list/view-tasklist.screen';
+import { NavigationContainer } from '@react-navigation/native';
+import { RootRouter } from './src/router';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -65,7 +67,7 @@ function App(): React.JSX.Element {
 
   return (
     <SafeAreaView style={{ backgroundColor:'#0077B6', flex:1}}>
-      <ViewTaskList />
+       <RootRouter/>    
     </SafeAreaView>
   );
 }
