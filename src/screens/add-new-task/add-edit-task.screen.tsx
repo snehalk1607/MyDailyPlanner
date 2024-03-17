@@ -7,6 +7,8 @@ import { AddOrEditTaskStyles } from './add-edit-task.styles';
 import { LabelsResource } from '../../../constants/labels-resource';
 import { PRIORITY_LEVELS } from './add-edit-task.types';
 import * as Yup from 'yup';
+import Toast from 'react-native-toast-message';
+import { useNavigation } from '@react-navigation/native';
 
 const validationSchema = Yup.object().shape({
     title: Yup.string().required('Please fill this field'),
@@ -18,6 +20,7 @@ const validationSchema = Yup.object().shape({
 
 export const AddOrEditTask = () => {
     const styles = AddOrEditTaskStyles; 
+    const navigate = useNavigation();
 
     return ( 
     <View style={styles.rootView}>
@@ -27,17 +30,19 @@ export const AddOrEditTask = () => {
     validationSchema={validationSchema}
     onSubmit={values => {
         console.log('values', values);
+        Toast.show({ type: 'success', text1: 'Task Added Successfully', position: 'bottom', bottomOffset: 70})
+        //navigate.goBack();
       }}>
-    {({handleSubmit, errors,  handleChange, values, setFieldValue }) => (
+    {({handleSubmit, errors,  handleChange, values, setFieldValue, touched }) => (
       <View style={{flex:1}}>
-        
+        <Toast/>
         <FieldLabel title={LabelsResource.TASKLIST_ADD_EDIT_SCREEN_TASK_TITLE} required />
         <TextInput  style={styles.textInput} value={values.title}  onChangeText={handleChange('title')}></TextInput>
-       {errors.title && <Text style={styles.errorText}>{errors.title}</Text>}
+       {errors.title &&  touched.title && <Text style={styles.errorText}>{errors.title}</Text>}
         
         <FieldLabel title={LabelsResource.TASKLIST_ADD_EDIT_SCREEN_TASK_DESCRIPTION} />
         <TextInput  style={styles.textInput} value={values.description}  onChangeText={handleChange('description')}></TextInput>
-        {errors.description && <Text style={styles.errorText}>{errors.description}</Text>}
+        {errors.description && touched.description && <Text style={styles.errorText}>{errors.description}</Text>}
 
         <View style={{flexDirection:'row'}}>
         <FieldLabel title={LabelsResource.TASKLIST_ADD_EDIT_SCREEN_DUE_DATE} required/>
