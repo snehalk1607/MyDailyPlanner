@@ -18,7 +18,7 @@ export const updateTask = (task: Task) => ({
     payload: task
 });
 
-export const deleteTask = (task: Task) => ({
+export const deleteTask = (id: number) => ({
     type: DELETE_TASK,
-    payload: task
+    payload: id
 });

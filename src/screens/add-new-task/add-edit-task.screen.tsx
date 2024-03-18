@@ -10,7 +10,7 @@ import { PRIORITY_LEVELS } from './add-edit-task.types';
 import * as Yup from 'yup';
 import Toast from 'react-native-toast-message';
 import { useNavigation, useRoute } from '@react-navigation/native';
-import { ADD_TASK, UPDATE_TASK } from '../../store/action.types';
+import { UPDATE_TASK } from '../../store/action.types';
 
 const validationSchema = Yup.object().shape({
     title: Yup.string().required('Please fill this field'),

@@ -42,6 +42,18 @@ export const TaskCardStyles = StyleSheet.create({
         fontWeight: '600',
         marginBottom: 5
     }
-
-
 });
+
+export const SwipeViewStyles = StyleSheet.create({
+    rootView:{
+            backgroundColor:'red',
+            opacity: 30,
+            flex:1,
+            margin: 15,
+            alignItems:'flex-end',
+            justifyContent:'center',
+            borderRadius: 12,
+            shadowColor: ColorPalete.GREY,
+        },
+    }
+);

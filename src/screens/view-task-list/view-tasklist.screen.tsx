@@ -4,11 +4,12 @@ import { useSelector } from 'react-redux';
 import { viewTaskListStyles } from './view-tasklist.styles';
 import { TaskListImage } from '../../../assets';
 import { LabelsResource } from '../../../constants/labels-resource';
-import { TaskCard } from './components/task-card.component';
+import { SwipeToDelete, TaskCard } from './components/task-card.component';
 import { useNavigation } from '@react-navigation/native';
 import { ROOT_NAVIGATOR_SCREENS } from '../../router.enum';
 import { store } from '../../store/store';
 import { ADD_TASK } from '../../store/action.types';
+import {SwipeListView} from 'react-native-swipe-list-view';
 
 
 export const ViewTaskList = () => {
@@ -50,7 +51,16 @@ export const ViewTaskList = () => {
     return (
         <View style={viewTaskListStyles.rootView}>
             {HeaderComponent()}          
-            <FlatList data={taskList} renderItem={({item}) => <TaskCard task={item}/>}  ListEmptyComponent={() => EmptyList()}></FlatList>          
+            <SwipeListView
+             data={taskList} 
+             renderItem={({item}) => <TaskCard task={item}/>}  
+             ListEmptyComponent={() => EmptyList()}
+             renderHiddenItem={ ({item}) => <SwipeToDelete id={item.id} />}
+            leftOpenValue={75}
+            disableRightSwipe
+            rightOpenValue={-75}
+             >
+            </SwipeListView>          
             {AddNewTaskButton()}
         </View>
     )
