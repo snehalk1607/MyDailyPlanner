@@ -1,4 +1,4 @@
-import { ADD_TASK, DELETE_TASK, GET_TASKS, UPDATE_TASK } from './action.types';
+import { ADD_TASK, DELETE_TASK, GET_TASKS, MARK_TASK_COMPLETE, UPDATE_TASK } from './action.types';
 import { Task } from "../services/task.types";
 
 
@@ -22,3 +22,9 @@ export const deleteTask = (id: number) => ({
     type: DELETE_TASK,
     payload: id
 });
+
+export const markTaskComplete = (id: number) => ({
+    type: MARK_TASK_COMPLETE,
+    payload: id
+});
+

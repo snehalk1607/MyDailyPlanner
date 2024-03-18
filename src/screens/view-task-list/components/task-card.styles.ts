@@ -46,7 +46,7 @@ export const TaskCardStyles = StyleSheet.create({
 
 export const SwipeViewStyles = StyleSheet.create({
     rootView:{
-            backgroundColor:'red',
+            backgroundColor:'white',
             opacity: 30,
             flex:1,
             margin: 15,
@@ -55,5 +55,7 @@ export const SwipeViewStyles = StyleSheet.create({
             borderRadius: 12,
             shadowColor: ColorPalete.GREY,
         },
+        deleteText:{
+            color:'red', fontWeight: 'bold', marginRight: 10}
     }
 );

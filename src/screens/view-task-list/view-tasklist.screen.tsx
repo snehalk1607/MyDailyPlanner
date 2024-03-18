@@ -31,11 +31,10 @@ export const ViewTaskList = () => {
     };
 
     const AddNewTaskButton = () => {
-        return (
+        return (          
              <TouchableOpacity style={viewTaskListStyles.footer} onPress={() => navigation.navigate(ROOT_NAVIGATOR_SCREENS.ADD_EDIT_TASK, {task: {}, action: ADD_TASK})} >
                 <Text style={viewTaskListStyles.addNewTaskText}>{LabelsResource.TASKLIST_ADD_TASK_BUTTON}</Text>
-            </TouchableOpacity>
-           
+            </TouchableOpacity>        
         )
     };
 
@@ -53,6 +52,7 @@ export const ViewTaskList = () => {
             {HeaderComponent()}          
             <SwipeListView
              data={taskList} 
+             style={{marginBottom: 50}}
              renderItem={({item}) => <TaskCard task={item}/>}  
              ListEmptyComponent={() => EmptyList()}
              renderHiddenItem={ ({item}) => <SwipeToDelete id={item.id} />}

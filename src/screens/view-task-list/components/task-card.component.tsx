@@ -8,10 +8,11 @@ import { useNavigation } from '@react-navigation/native';
 import { ROOT_NAVIGATOR_SCREENS } from '../../../router.enum';
 import { DELETE_TASK, UPDATE_TASK } from '../../../store/action.types';
 import { useDispatch } from 'react-redux';
+import { LabelsResource } from '../../../../constants/labels-resource';
 
 
 export const TaskCard = (props) => {
-    const {title, description, dueDate, priority} = props.task;
+    const {title, description, dueDate, priority, id, isComplete} = props.task;
     const navigation = useNavigation();
     const styles = TaskCardStyles;
     return (
@@ -23,11 +24,11 @@ export const TaskCard = (props) => {
         <Image source={EditIcon} style={{alignSelf:'flex-end', width: 20, height: 20, marginBottom: 10}}  />
         </TouchableOpacity>
         </View>
-        <Text style={styles.taskDueDate}>{`Due: ${new Date(dueDate).toDateString()}`}</Text>
-        <Text style={styles.taskDescription}>{description ?? ''}</Text>       
+       {!isComplete && <Text style={styles.taskDueDate}>{`Due: ${new Date(dueDate).toDateString()}`}</Text>}
+        {description && <Text style={styles.taskDescription}>{description ?? ''}</Text> }      
         <View style={styles.flexDirectionRow}>
         <View style={{flex:1, flexDirection:'row', alignItems:'center'}}>
-        <CustomCheckBox/>
+        <CustomCheckBox id={id} isComplete={isComplete}/>
         </View>
         <Text style={styles.taskPriority}>{priority}</Text>
         </View>
@@ -44,7 +45,7 @@ export const SwipeToDelete = (props) => {
             type: DELETE_TASK,
             payload: props.id
           })}>           
-            <Text style={{color:'white', fontWeight: 'bold', marginRight: 10}}>{'DELETE'}</Text>           
+            <Text style={styles.deleteText}>{LabelsResource.TASKLIST_ADD_EDIT_SCREEN_DELETE}</Text>           
         </TouchableOpacity>
     )
 }

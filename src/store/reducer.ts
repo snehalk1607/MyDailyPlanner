@@ -1,5 +1,5 @@
 
-import { ADD_TASK, DELETE_TASK, GET_TASKS, UPDATE_TASK } from "./action.types";
+import { ADD_TASK, DELETE_TASK, GET_TASKS, MARK_TASK_COMPLETE, UPDATE_TASK } from "./action.types";
 
 const initialState = {
     taskList: []
@@ -17,7 +17,7 @@ export const ManageTaskReducer = (state = initialState, action: any) => {
         case ADD_TASK:
           return {
             ...state,
-            taskList: [...state.taskList, {...payload, id: state.taskList.length + 1}]
+            taskList: [...state.taskList, {...payload, id: state.taskList.length + 1, isComplete: false}]
           };
         
           case UPDATE_TASK:
@@ -30,11 +30,24 @@ export const ManageTaskReducer = (state = initialState, action: any) => {
             return {
               ...state, 
              taskList: deleteTask(state.taskList, payload)
-            }
+            };
+          
+            case MARK_TASK_COMPLETE:
+              return {
+                ...state, 
+               taskList: markTaskComplete(state.taskList, payload)
+              };
+
           default:
             return state;
         }
 };
+
+function findTaskIndex (state, id){
+  var index = -1; 
+  state.find((item, i) => item.id === id ? index = i : index = -1);
+  return index;
+}
 
 function updateTask(state, payload){
   var index = -1; 
@@ -50,3 +63,8 @@ function deleteTask(state, id){
 return [...state];
 }
 
+function markTaskComplete(state, id){
+  var index = findTaskIndex(state, id);
+  state[index].isComplete = !state[index].isComplete;
+  return [...state];
+}

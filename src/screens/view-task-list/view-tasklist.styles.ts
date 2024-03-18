@@ -20,7 +20,7 @@ export const viewTaskListStyles =
         fontWeight:'600'
         },
         footer:{
-        bottom:6,
+        bottom:20,
         left:12,
         right:12,
         position:'absolute',

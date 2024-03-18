@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Button, TextInput, TouchableOpacity } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { Text, View } from 'react-native';
-import { CustomDatePicker, CustomDropDown, CustomTextInput, FieldLabel } from './components/form-components';
+import { CustomDatePicker, CustomDropDown, FieldLabel } from './components/form-components';
 import { AddOrEditTaskStyles } from './add-edit-task.styles';
 import { LabelsResource } from '../../../constants/labels-resource';
 import { PRIORITY_LEVELS } from './add-edit-task.types';
@@ -20,21 +20,22 @@ const validationSchema = Yup.object().shape({
 });
 
 
-export const AddOrEditTask = (props) => {
+export const AddOrEditTask = () => {
     const styles = AddOrEditTaskStyles; 
     const navigation = useNavigation();
     const {task, action}= useRoute().params;
     const dispatch = useDispatch();
+    const isEditScreen = action === UPDATE_TASK;
     return ( 
     <View style={styles.rootView}>
-    <Text style={styles.screenHeading}>{LabelsResource.TASKLIST_ADD_EDIT_SCREEN_HEADING}</Text>
+    <Text style={styles.screenHeading}>{isEditScreen ? LabelsResource.TASKLIST_ADD_EDIT_SCREEN_EDIT_HEADING : LabelsResource.TASKLIST_ADD_EDIT_SCREEN_HEADING}</Text>
     <Formik        
     initialValues={{title: task.title, description: task.description, dueDate: task.dueDate || new Date(), priority: task.priority}}
     validationSchema={validationSchema}
     onSubmit={values => {
         dispatch({
           type: action,
-          payload: action === UPDATE_TASK ? {...values, id: task.id} : {...values}
+          payload: isEditScreen ? {...values, id: task.id} : {...values}
         });
         Toast.show({ type: 'success', text1: 'Task Added Successfully', position: 'bottom', bottomOffset: 70})
         navigation.goBack();
@@ -59,7 +60,7 @@ export const AddOrEditTask = (props) => {
         <CustomDropDown value={values.priority} onChange = {(priority: PRIORITY_LEVELS) => setFieldValue('priority', priority)}/>
         
         <TouchableOpacity style={styles.footer} onPress={() => handleSubmit()} >       
-        <Text style={styles.addNewTaskText}>{LabelsResource.TASKLIST_ADD_EDIT_SCREEN_SUBMIT}</Text>
+        <Text style={styles.addNewTaskText}>{ isEditScreen ? LabelsResource.TASKLIST_ADD_EDIT_SCREEN_SAVE_BUTTON :LabelsResource.TASKLIST_ADD_EDIT_SCREEN_SUBMIT}</Text>
         </TouchableOpacity>
 
       </View>
