@@ -8,6 +8,7 @@ import { TaskCard } from './components/task-card.component';
 import { useNavigation } from '@react-navigation/native';
 import { ROOT_NAVIGATOR_SCREENS } from '../../router.enum';
 import { store } from '../../store/store';
+import { ADD_TASK } from '../../store/action.types';
 
 
 export const ViewTaskList = () => {
@@ -30,7 +31,7 @@ export const ViewTaskList = () => {
 
     const AddNewTaskButton = () => {
         return (
-             <TouchableOpacity style={viewTaskListStyles.footer} onPress={() => navigation.navigate(ROOT_NAVIGATOR_SCREENS.ADD_EDIT_TASK)} >
+             <TouchableOpacity style={viewTaskListStyles.footer} onPress={() => navigation.navigate(ROOT_NAVIGATOR_SCREENS.ADD_EDIT_TASK, {task: {}, action: ADD_TASK})} >
                 <Text style={viewTaskListStyles.addNewTaskText}>{LabelsResource.TASKLIST_ADD_TASK_BUTTON}</Text>
             </TouchableOpacity>
            

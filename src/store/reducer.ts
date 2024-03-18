@@ -1,6 +1,4 @@
 
-import { Task } from "react-native";
-import { PRIORITY_LEVELS } from "../screens/add-new-task/add-edit-task.types";
 import { ADD_TASK, GET_TASKS, UPDATE_TASK } from "./action.types";
 
 const initialState = {
@@ -8,6 +6,7 @@ const initialState = {
 }
 
 export const ManageTaskReducer = (state = initialState, action: any) => {
+
     const {type, payload} = action; 
     switch (type) {
         case GET_TASKS:
@@ -19,10 +18,22 @@ export const ManageTaskReducer = (state = initialState, action: any) => {
         case ADD_TASK:
           return {
             ...state,
-            taskList: [...state.taskList, payload]
+            taskList: [...state.taskList, {...payload, id: state.taskList.length + 1}]
           };
         
+          case UPDATE_TASK:
+            return {
+              ...state, 
+              taskList: updateTask(state.taskList, payload)
+            };
           default:
             return state;
         }
 };
+
+function updateTask(state, payload){
+  var index = -1; 
+  state.find((item, i) => item.id === payload.id ? index = i : index = -1);
+  state[index] = payload;
+ return [...state]
+}

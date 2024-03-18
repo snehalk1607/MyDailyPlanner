@@ -9,8 +9,8 @@ import { LabelsResource } from '../../../constants/labels-resource';
 import { PRIORITY_LEVELS } from './add-edit-task.types';
 import * as Yup from 'yup';
 import Toast from 'react-native-toast-message';
-import { useNavigation } from '@react-navigation/native';
-import { ADD_TASK } from '../../store/action.types';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { ADD_TASK, UPDATE_TASK } from '../../store/action.types';
 
 const validationSchema = Yup.object().shape({
     title: Yup.string().required('Please fill this field'),
@@ -20,24 +20,24 @@ const validationSchema = Yup.object().shape({
 });
 
 
-export const AddOrEditTask = () => {
+export const AddOrEditTask = (props) => {
     const styles = AddOrEditTaskStyles; 
-    const navigate = useNavigation();
+    const navigation = useNavigation();
+    const {task, action}= useRoute().params;
     const dispatch = useDispatch();
-
     return ( 
     <View style={styles.rootView}>
     <Text style={styles.screenHeading}>{LabelsResource.TASKLIST_ADD_EDIT_SCREEN_HEADING}</Text>
     <Formik        
-    initialValues={{title: '', description: '', dueDate: new Date(), priority: PRIORITY_LEVELS.MEDIUM}}
+    initialValues={{title: task.title, description: task.description, dueDate: task.dueDate || new Date(), priority: task.priority}}
     validationSchema={validationSchema}
     onSubmit={values => {
         dispatch({
-          type: ADD_TASK,
-          payload: {...values}
+          type: action,
+          payload: action === UPDATE_TASK ? {...values, id: task.id} : {...values}
         });
         Toast.show({ type: 'success', text1: 'Task Added Successfully', position: 'bottom', bottomOffset: 70})
-        navigate.goBack();
+        navigation.goBack();
       }}>
     {({handleSubmit, errors,  handleChange, values, setFieldValue, touched }) => (
       <View style={{flex:1}}>
