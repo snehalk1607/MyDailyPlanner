@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "262544808360",
+    "project_id": "my-task-planner-189de",
+    "storage_bucket": "my-task-planner-189de.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:262544808360:android:5b07811cee2e15ff87e59d",
+        "android_client_info": {
+          "package_name": "com.mydailyplanner"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBWFyJ8Tnf_VXhj1iBJJpdY-pJ8sN2U2rU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
