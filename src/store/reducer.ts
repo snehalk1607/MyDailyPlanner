@@ -1,5 +1,7 @@
 
-import { ADD_TASK, DELETE_TASK, GET_TASKS, MARK_TASK_COMPLETE, UPDATE_TASK } from "./action.types";
+import { TaskServices } from "../services/tasks.services";
+import { ADD_TASK, DELETE_TASK, GET_TASKS, MARK_TASK_COMPLETE, SET_TASKS, UPDATE_TASK } from "./action.types";
+import { store } from "./store";
 
 const initialState = {
     taskList: []
@@ -13,58 +15,67 @@ export const ManageTaskReducer = (state = initialState, action: any) => {
             ...state,
             taskList: state
           };
+
+          case SET_TASKS:
+            return {
+              ...state,
+              taskList: payload
+            };
     
         case ADD_TASK:
           return {
             ...state,
-            taskList: [...state.taskList, {...payload, id: state.taskList.length + 1, isComplete: false}]
+            taskList: addTaskToRedux(state.taskList, payload)
           };
         
           case UPDATE_TASK:
             return {
               ...state, 
-              taskList: updateTask(state.taskList, payload)
+              taskList: updateTaskToRedux(state.taskList, payload)
             };
           
           case DELETE_TASK:
             return {
               ...state, 
-             taskList: deleteTask(state.taskList, payload)
+             taskList: deleteTaskToRedux(state.taskList, payload)
             };
           
             case MARK_TASK_COMPLETE:
               return {
                 ...state, 
-               taskList: markTaskComplete(state.taskList, payload)
+               taskList: markTaskCompleteToRedux(state.taskList, payload)
               };
+            
 
           default:
             return state;
         }
 };
 
-function findTaskIndex (state, id){
-  var index = -1; 
-  state.find((item, i) => item.id === id ? index = i : index = -1);
-  return index;
+function addTaskToRedux(taskList, payload){
+  let state = [];
+  const modifyPayload = {...payload, id: taskList.length + 1, isComplete: false};
+  TaskServices.addTask(modifyPayload).then(
+   state = [...taskList, modifyPayload]
+  );
+  return [...state];
 }
 
-function updateTask(state, payload){
-  var index = -1; 
-  state.find((item, i) => item.id === payload.id ? index = i : index = -1);
-  state[index] = payload;
- return [...state]
+function updateTaskToRedux(state, payload){
+ var index = state.findIndex(item => item.id === payload.id);
+ let newArray  = [];
+  TaskServices.updateTask(payload).then(newArray = [...state.slice(0, index), payload,...state.slice(index + 1)]);
+  return [...newArray];               
 }
 
-function deleteTask(state, id){
-  var index = -1; 
-  state.find((item, i) => item.id === id ? index = i : index = -1); 
-  state.splice(index, 1);
-return [...state];
+function deleteTaskToRedux(state, id){
+  var index = state.findIndex(item => item.id === id);
+   TaskServices.deleteTask(id).then(state.splice(index, 1));
+   return [...state];
 }
 
-function markTaskComplete(state, id){
-  var index = findTaskIndex(state, id);
-  state[index].isComplete = !state[index].isComplete;
+function markTaskCompleteToRedux(state, payload){
+  var index = state.findIndex(item => item.id === payload.id);
+  TaskServices.updateCompletionOfTask(payload).then(state[index].isComplete = !payload.isComplete);
   return [...state];
 }

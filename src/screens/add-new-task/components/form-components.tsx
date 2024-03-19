@@ -36,7 +36,7 @@ export const CustomDatePicker = (props) => {
         aria-modal = {true}
         style={{marginLeft: 18, marginBottom: 14}}
         collapsable={true}
-        value={value}
+        value={new Date()}
         onChange={(_, selectedDate) => onChange(selectedDate)}
         />   
                
