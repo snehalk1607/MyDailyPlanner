@@ -14,7 +14,7 @@ import { UPDATE_TASK } from '../../store/action.types';
 
 const validationSchema = Yup.object().shape({
     title: Yup.string().required('Please fill this field'),
-    description: Yup.string().min(3, 'Please enter minimum 3 letters'),
+    description: Yup.string().min(3, 'Please enter minimum 3 characters'),
     dueDate: Yup.date().required('Please fill this field'),
     priority: Yup.string().required('Please fill this field')
 });
@@ -40,7 +40,7 @@ export const AddOrEditTask = () => {
         Toast.show({ type: 'success', text1: isEditScreen ? LabelsResource.TASKLIST_UPDATED_TOAST_MESSAGE : LabelsResource.TASKLIST_ADDED_TOAST_MESSAGE, position: 'bottom', bottomOffset: 70, text1Style: {fontSize: 15}})
         setTimeout(() => {
           navigation.goBack();
-        }, 2000);
+        }, 1600);
       }}>
     {({handleSubmit, errors,  handleChange, values, setFieldValue, touched }) => (
       <View style={{flex:1}}>

@@ -10,5 +10,6 @@ export const ColorPalete = {
     LOW_PRIORITY: '#190482',
     HIGH_PRIORITY: '#FF0000',
     MEDIUM_PRIORITY: '#FC6736',
-    GREEN : '#4caf50'
+    GREEN : '#4caf50',
+    SELECTION_COLOR: '#d4ebf2'
 }

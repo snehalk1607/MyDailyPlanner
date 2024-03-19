@@ -1,7 +1,6 @@
 
 import { TaskServices } from "../services/tasks.services";
 import { ADD_TASK, DELETE_TASK, GET_TASKS, MARK_TASK_COMPLETE, SET_TASKS, UPDATE_TASK } from "./action.types";
-import { store } from "./store";
 
 const initialState = {
     taskList: []
@@ -45,16 +44,15 @@ export const ManageTaskReducer = (state = initialState, action: any) => {
                 ...state, 
                taskList: markTaskCompleteToRedux(state.taskList, payload)
               };
-            
-
           default:
             return state;
         }
 };
 
 function addTaskToRedux(taskList, payload){
+  const id = Math.floor(1000 + Math.random() * 9000);
   let state = [];
-  const modifyPayload = {...payload, id: taskList.length + 1, isComplete: false};
+  const modifyPayload = {...payload, id: id , isComplete: false};
   TaskServices.addTask(modifyPayload).then(
    state = [...taskList, modifyPayload]
   );

@@ -43,5 +43,28 @@ export const viewTaskListStyles =
             color: ColorPalete.WHITE,
             fontWeight: '500',
             paddingVertical: 8
+        },
+        sortText:{
+            fontSize: 16,
+            padding: 7,
+            color: ColorPalete.NAVY_BLUE,
+            fontWeight: '500'    
+        },
+        sortButton:{
+            marginTop: 10,
+            marginRight: 12,
+            fontWeight: '500',
+            borderRadius: 15,
+            borderColor: ColorPalete.ORANGE_DARK,
+            borderWidth: 1
+        },
+        selectedButton:{
+            backgroundColor: ColorPalete.SELECTION_COLOR,
+            marginTop: 10,
+            marginRight: 12,
+            fontWeight: '500',
+            borderRadius: 15,
+            borderColor: ColorPalete.NAVY_BLUE,
+            borderWidth: 1
         }
     });

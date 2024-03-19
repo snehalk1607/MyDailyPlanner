@@ -28,8 +28,7 @@ export const CustomTextInput = (props) => {
 
 export const CustomDatePicker = (props) => {
     const {value, onChange} = props;
-    return ( 
-       
+    return (        
         <RNDateTimePicker
         mode={'date'}
         minimumDate={new Date('2023-01-01')}
@@ -46,9 +45,9 @@ export const CustomDatePicker = (props) => {
 export const CustomDropDown = (props) => {
     const {value, onChange} = props;
     const data = [
-        {key: PRIORITY_LEVELS.HIGH, value:PRIORITY_LEVELS.HIGH},
-        {key: PRIORITY_LEVELS.MEDIUM, value:PRIORITY_LEVELS.MEDIUM},
-        {key: PRIORITY_LEVELS.LOW, value:PRIORITY_LEVELS.LOW}]
+        {key: 1, value:PRIORITY_LEVELS.HIGH},
+        {key: 2, value:PRIORITY_LEVELS.MEDIUM},
+        {key: 3, value:PRIORITY_LEVELS.LOW}]
     return (
         <SelectList 
         dropdownTextStyles={styles.dropDownList}
