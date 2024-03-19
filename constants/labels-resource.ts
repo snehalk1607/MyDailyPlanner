@@ -13,6 +13,9 @@ export const LabelsResource ={
     'TASKLIST_ADD_EDIT_SCREEN_SAVE_BUTTON': 'Save Task',
     'TASKLIST_ADD_EDIT_SCREEN_EDIT_HEADING': 'Edit Task',
     'TASKLIST_VIEW_TASKS_LIST_COMPLETE': 'Completed',
-    'TASKLIST_VIEW_TASKS_LIST_INCOMPLETE':'Mark as Complete'
+    'TASKLIST_VIEW_TASKS_LIST_INCOMPLETE':'Mark as Complete',
+    'TASKLIST_ADDED_TOAST_MESSAGE':'Task added successfully',
+    'TASKLIST_UPDATED_TOAST_MESSAGE':'Task updated successfully',
+
 
 }

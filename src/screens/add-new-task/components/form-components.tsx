@@ -36,8 +36,8 @@ export const CustomDatePicker = (props) => {
         aria-modal = {true}
         style={{marginLeft: 18, marginBottom: 14}}
         collapsable={true}
-        value={new Date()}
-        onChange={(_, selectedDate) => onChange(selectedDate)}
+        value={new Date(value)}
+        onChange={(_, selectedDate) => onChange(selectedDate?.toDateString())}
         />   
                
     );
@@ -55,7 +55,7 @@ export const CustomDropDown = (props) => {
         inputStyles={styles.dropDownList}
         setSelected={(priority: PRIORITY_LEVELS) => onChange(priority) }
         data={data}
-        defaultOption={{key: 2, value: PRIORITY_LEVELS.MEDIUM}}
+        defaultOption={{key: PRIORITY_LEVELS.MEDIUM, value: PRIORITY_LEVELS.MEDIUM}}
     />
     );
 }
