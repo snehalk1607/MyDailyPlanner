@@ -66,13 +66,17 @@ export const ViewTaskList = () => {
     return (
         <View style={styles.rootView}>
             {HeaderComponent()} 
-            <View style={{flexDirection: 'row', alignSelf:'flex-end'}}>            
+            <View style={{flexDirection: 'row', alignSelf:'flex-end'}}>
+            {taskList.length !== 0 && 
+            <>         
             <TouchableOpacity style={[sortingFlag.sortByDate ? styles.selectedButton: styles.sortButton]} onPress={() => updateSortingFlag({sortByDate: true, sortByPriority: false})}>
             <Text style={styles.sortText}>{'Sort by Date'}</Text> 
             </TouchableOpacity>   
             <TouchableOpacity style={[sortingFlag.sortByPriority ? styles.selectedButton: styles.sortButton]} onPress={() =>  updateSortingFlag({sortByDate: false, sortByPriority: true})}>
             <Text style={styles.sortText}>{'Sort by Priority'}</Text> 
-            </TouchableOpacity>    
+            </TouchableOpacity>  
+            </>
+}  
             </View>             
             <SwipeListView
             showsVerticalScrollIndicator={false}

@@ -52,9 +52,9 @@ export const CustomDropDown = (props) => {
         <SelectList 
         dropdownTextStyles={styles.dropDownList}
         inputStyles={styles.dropDownList}
-        setSelected={(priority: PRIORITY_LEVELS) => onChange(priority) }
+        setSelected={(priority: number) => onChange(priority) }
         data={data}
-        defaultOption={{key: PRIORITY_LEVELS.MEDIUM, value: PRIORITY_LEVELS.MEDIUM}}
+        defaultOption={{key: 2, value: PRIORITY_LEVELS.MEDIUM}}
     />
     );
 }
