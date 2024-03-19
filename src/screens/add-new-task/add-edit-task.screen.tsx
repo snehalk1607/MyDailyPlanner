@@ -11,6 +11,7 @@ import * as Yup from 'yup';
 import Toast from 'react-native-toast-message';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { UPDATE_TASK } from '../../store/action.types';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const validationSchema = Yup.object().shape({
     title: Yup.string().required('Please fill this field'),
@@ -28,7 +29,10 @@ export const AddOrEditTask = () => {
     const isEditScreen = action === UPDATE_TASK;
     return ( 
     <View style={styles.rootView}>
-    <Text style={styles.screenHeading}>{isEditScreen ? LabelsResource.TASKLIST_ADD_EDIT_SCREEN_EDIT_HEADING : LabelsResource.TASKLIST_ADD_EDIT_SCREEN_HEADING}</Text>
+    <View style={{flexDirection: 'row'}}>
+    <Text style={styles.backText} onPress={() => navigation.goBack()}>{'< back'}</Text>
+    <Text style={[styles.screenHeading]}>{isEditScreen ? LabelsResource.TASKLIST_ADD_EDIT_SCREEN_EDIT_HEADING : LabelsResource.TASKLIST_ADD_EDIT_SCREEN_HEADING}</Text>   
+    </View>
     <Formik        
     initialValues={{title: task.title, description: task.description || '', dueDate: task.dueDate || new Date().toDateString(), priority: task.priority || PRIORITY_LEVELS.MEDIUM}}
     validationSchema={validationSchema}

@@ -75,6 +75,7 @@ export const ViewTaskList = () => {
             </TouchableOpacity>    
             </View>             
             <SwipeListView
+            showsVerticalScrollIndicator={false}
              data={getSortedData()} 
              style={{marginBottom: 50}}
              renderItem={({item}) => <TaskCard task={item}/>}  

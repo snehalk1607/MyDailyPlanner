@@ -20,7 +20,7 @@ export const viewTaskListStyles =
         fontWeight:'600'
         },
         footer:{
-        bottom:20,
+        bottom:30,
         left:12,
         right:12,
         position:'absolute',
@@ -51,16 +51,16 @@ export const viewTaskListStyles =
             fontWeight: '500'    
         },
         sortButton:{
-            marginTop: 10,
+            marginVertical: 10,
             marginRight: 12,
             fontWeight: '500',
             borderRadius: 15,
             borderColor: ColorPalete.ORANGE_DARK,
-            borderWidth: 1
+            borderWidth: 1,
         },
         selectedButton:{
             backgroundColor: ColorPalete.SELECTION_COLOR,
-            marginTop: 10,
+            marginVertical: 10,
             marginRight: 12,
             fontWeight: '500',
             borderRadius: 15,

@@ -8,7 +8,7 @@ export class TaskServices{
     private static readonly DB_COLLECTION = FIREBASE_DB_COLLECTION; 
     public static readonly DB_INIT = firebase.app().database(this.DB_URL);
 
-   public  static async fetchData() {
+   public static async fetchData() {
         try {
           const snapshot = await TaskServices.DB_INIT.ref(this.DB_COLLECTION).once('value');
           return snapshot.val();

@@ -21,7 +21,16 @@ export const AddOrEditTaskStyles = StyleSheet.create({
             flex:1, marginVertical: 30, marginHorizontal: 15, justifyContent:'center'
         },
         screenHeading:{
-            alignSelf:'center', fontSize: 20, color: ColorPalete.ORANGE_DARK, fontWeight: 'bold', marginBottom: 18},
+             justifyContent: 'center',
+             fontSize: 20, 
+             color: ColorPalete.ORANGE_DARK, 
+             fontWeight: 'bold', 
+             marginBottom: 18, 
+             textAlign:'center', 
+             marginLeft: 0,
+             flex:0.9, 
+           
+            },
             textInput:{
                 borderColor: ColorPalete.GREY_DARK,
                 borderRadius: 6,
@@ -31,7 +40,10 @@ export const AddOrEditTaskStyles = StyleSheet.create({
                 paddingHorizontal: 5,
                 marginBottom: 10,
                 textAlignVertical: 'center'
-            }, 
+            },
+        backText:{
+           fontSize: 18, color: ColorPalete.ORANGE_DARK, marginBottom: 18, alignSelf: 'flex-start'
+        },
         errorText:{
             fontSize: 14, color: 'red', marginBottom: 12, marginLeft: 6
         }
