@@ -19,7 +19,8 @@ export const FormComponentsStyles = StyleSheet.create({
         height: 45,
         paddingHorizontal: 5,
         marginBottom: 14,
-        textAlignVertical: 'center'
+        textAlignVertical: 'center',
+        color: ColorPalete.GREY_DARK
     }, 
     dropDownList:{
         fontSize: uniformFontSize
