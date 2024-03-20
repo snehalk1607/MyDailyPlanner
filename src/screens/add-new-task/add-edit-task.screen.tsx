@@ -1,6 +1,6 @@
 import { Formik } from 'formik';
 import React, { useState } from 'react';
-import { Button, TextInput, TouchableOpacity } from 'react-native';
+import { Button, Keyboard, Platform, TextInput, TouchableOpacity } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { Text, View } from 'react-native';
 import { CustomDatePicker, CustomDropDown, FieldLabel } from './components/form-components';
@@ -11,7 +11,6 @@ import * as Yup from 'yup';
 import Toast from 'react-native-toast-message';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { UPDATE_TASK } from '../../store/action.types';
-import Icon from 'react-native-vector-icons/FontAwesome';
 
 const validationSchema = Yup.object().shape({
     title: Yup.string().required('Please fill this field'),
@@ -37,6 +36,7 @@ export const AddOrEditTask = () => {
     initialValues={{title: task.title, description: task.description || '', dueDate: task.dueDate || new Date().toDateString(), priority: task.priority || PRIORITY_LEVELS.MEDIUM}}
     validationSchema={validationSchema}
     onSubmit={values => {
+     Platform.OS === 'android' ? Keyboard.dismiss(): null;
         dispatch({
           type: action,
           payload: isEditScreen ? {...values, id: task.id} : {...values}

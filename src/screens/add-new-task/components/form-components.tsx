@@ -1,11 +1,11 @@
-import React from 'react';
-import { View, Text, TextInput } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, TextInput, Button, Platform } from 'react-native';
 import { FormComponentsStyles } from './form-components.styles';
 import { ColorPalete } from '../../../../constants/color-palete';
-import RNDateTimePicker from '@react-native-community/datetimepicker';
+import DateTimePicker from '@react-native-community/datetimepicker';
 import { SelectList } from 'react-native-dropdown-select-list';
 import { PRIORITY_LEVELS } from '../add-edit-task.types';
-
+import RNDateTimePicker from '@react-native-community/datetimepicker';
 
 const styles = FormComponentsStyles;
 
@@ -28,16 +28,30 @@ export const CustomTextInput = (props) => {
 
 export const CustomDatePicker = (props) => {
     const {value, onChange} = props;
-    return (        
-        <RNDateTimePicker
+    const isAndroid = Platform.OS === 'android';
+    const [showCalendar, setShowCalendar] = useState(isAndroid ? false : true);
+    const [selectedDate, setSelectedDate] = useState(value);
+
+    const setDateSelection = (event: Event, selectedDate: Date) => {
+        if(event.type === 'set') onChange(selectedDate?.toDateString());
+       isAndroid && setShowCalendar(false);
+    };
+
+
+     
+    return (
+        <View style={{marginLeft: 20}}>
+        {isAndroid && <Button title={value} onPress={() => setShowCalendar(true)}></Button>}
+        {showCalendar &&  <RNDateTimePicker
         mode={'date'}
         minimumDate={new Date('2023-01-01')}
-        aria-modal = {true}
+        aria-modal = {false}
         style={{marginLeft: 18, marginBottom: 14}}
         collapsable={true}
-        value={new Date(value)}
-        onChange={(_, selectedDate) => onChange(selectedDate?.toDateString())}
-        />   
+        value={new Date(selectedDate)}
+        onChange={(e, date) => setDateSelection(e, date)}
+        />}
+        </View> 
                
     );
 }
