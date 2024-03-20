@@ -1,3 +1,9 @@
+/**
+ * fileName: form-components.styles.ts
+ * description: Stylesheet for add/ edit task list screen
+ */
+
+
 import { StyleSheet } from "react-native";
 import { ColorPalete } from "../../../../constants/color-palete";
 

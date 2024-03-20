@@ -1,4 +1,9 @@
-export const LabelsResource ={
+/**
+ * fileName: color-palete.ts
+ * description: Common file to use uniform colors aross application
+ */
+
+export const LabelsResource = {
     'TASKLIST_HEADER_USER' : 'Hello Marta,',
     'TASKLIST_HEADER_WELCOME_TEXT': 'Welcome to your planner!',
     'TASKLIST_NO_TASKS': "Let's start planning..",

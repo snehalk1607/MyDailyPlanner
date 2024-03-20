@@ -1,45 +1,50 @@
+/**
+ * fileName: form-components.tsx
+ * description: This file contains components to build the form
+ */
+
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, Platform } from 'react-native';
+import { View, Text, Button, Platform } from 'react-native';
+import RNDateTimePicker, { DateTimePickerEvent } from '@react-native-community/datetimepicker';
+
 import { FormComponentsStyles } from './form-components.styles';
 import { ColorPalete } from '../../../../constants/color-palete';
-import DateTimePicker from '@react-native-community/datetimepicker';
 import { SelectList } from 'react-native-dropdown-select-list';
 import { PRIORITY_LEVELS } from '../add-edit-task.types';
-import RNDateTimePicker from '@react-native-community/datetimepicker';
+
 
 const styles = FormComponentsStyles;
 
-export const FieldLabel = (props: {title: string, required?: boolean}) => {
-   
+/**
+ * @export
+ * @function FieldLabel
+ * @description It returns label of the fields
+ */
+export const FieldLabel = (props: {title: string, required?: boolean}): React.ReactElement => {  
     const {title, required} = props;
     return (
     <Text style={styles.textInputLabel}>{title}
     <Text style={[styles.textInputLabel, {color: ColorPalete.ORANGE_DARK}]}>{ required ? '*' : null}</Text>
     </Text>
     );
-}
+};
 
-export const CustomTextInput = (props) => {
-    const styles = FormComponentsStyles;
-    return (        
-        <TextInput style={[styles.textInput]} {...props}></TextInput>        
-    );
-}
-
-export const CustomDatePicker = (props) => {
+/**
+ * @export
+ * @function CustomDatePicker
+ * @description It returns custom date picker with android adjustments
+ */
+export const CustomDatePicker = (props:{value: string; onChange(_: string): void}): React.ReactElement => {
     const {value, onChange} = props;
     const isAndroid = Platform.OS === 'android';
     const [showCalendar, setShowCalendar] = useState(isAndroid ? false : true);
-    const [selectedDate, setSelectedDate] = useState(value);
+    const [selectedDate] = useState(value);
 
-    const setDateSelection = (event: Event, selectedDate: Date) => {
-        if(event.type === 'set') onChange(selectedDate?.toDateString());
+    const setDateSelection = (event: DateTimePickerEvent, selectedDate: Date | undefined) => {
+        if(event.type === 'set') onChange(selectedDate?.toDateString() || new Date().toDateString());
        isAndroid && setShowCalendar(false);
     };
-
-
-     
-    return (
+   return (
         <View style={{marginLeft: 20}}>
         {isAndroid && <Button title={value} onPress={() => setShowCalendar(true)}></Button>}
         {showCalendar &&  <RNDateTimePicker
@@ -51,13 +56,17 @@ export const CustomDatePicker = (props) => {
         value={new Date(selectedDate)}
         onChange={(e, date) => setDateSelection(e, date)}
         />}
-        </View> 
-               
+        </View>               
     );
-}
+};
 
-export const CustomDropDown = (props) => {
-    const {value, onChange} = props;
+/**
+ * @export
+ * @function FieldLabel
+ * @description It returns custom drop down based on SelectList
+ */
+export const CustomDropDown = (props: {value: number; onChange(_: number): void}): React.ReactElement => {
+    const {onChange} = props;
     const data = [
         {key: 1, value:PRIORITY_LEVELS.HIGH},
         {key: 2, value:PRIORITY_LEVELS.MEDIUM},
@@ -71,4 +80,4 @@ export const CustomDropDown = (props) => {
         defaultOption={{key: 2, value: PRIORITY_LEVELS.MEDIUM}}
     />
     );
-}
+};

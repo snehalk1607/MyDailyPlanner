@@ -1,3 +1,7 @@
+/**
+ * fileName: add-edit-task.styles.ts 
+ * description: This file contains styles for add or edit task screen
+ */
 import { StyleSheet } from "react-native";
 import { ColorPalete } from "../../../constants/color-palete";
 
@@ -11,14 +15,17 @@ export const AddOrEditTaskStyles = StyleSheet.create({
         backgroundColor:ColorPalete.ORANGE_BUTTON,
         alignItems:'center'
         },
-        addNewTaskText:{
+    addNewTaskText:{
             fontSize: 18,
             color: ColorPalete.WHITE,
             fontWeight: '500',
             paddingVertical: 8
         }, 
         rootView:{
-            flex:1, marginVertical: 30, marginHorizontal: 15, justifyContent:'center'
+            flex:1,
+            marginVertical: 30, 
+            marginHorizontal: 15, 
+            justifyContent:'center'
         },
         screenHeading:{
              justifyContent: 'center',
@@ -28,8 +35,7 @@ export const AddOrEditTaskStyles = StyleSheet.create({
              marginBottom: 18, 
              textAlign:'center', 
              marginLeft: 0,
-             flex:0.9, 
-           
+             flex:0.9,          
             },
             textInput:{
                 borderColor: ColorPalete.GREY_DARK,
@@ -46,6 +52,5 @@ export const AddOrEditTaskStyles = StyleSheet.create({
         },
         errorText:{
             fontSize: 14, color: 'red', marginBottom: 12, marginLeft: 6
-        }
-        
-})
+        }       
+});

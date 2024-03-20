@@ -1,3 +1,8 @@
+/**
+ * fileName: view-taskList.screen.tsx
+ * description: This file renders list of tasks
+ */
+
 import React, { useEffect, useState } from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { useSelector } from 'react-redux';
@@ -10,8 +15,6 @@ import { ROOT_NAVIGATOR_SCREENS } from '../../router.enum';
 import { store } from '../../store/store';
 import { ADD_TASK} from '../../store/action.types';
 import {SwipeListView} from 'react-native-swipe-list-view';
-import { PRIORITY_OBJECT } from './taskList.interface';
-import { SelectList } from 'react-native-dropdown-select-list';
 
 
 export const ViewTaskList = () => {

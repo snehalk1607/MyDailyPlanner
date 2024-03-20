@@ -1,3 +1,8 @@
+/**
+ * fileName: task-card.styles.ts
+ * description: This file has stylsheet for each task card 
+ */
+
 import { StyleSheet } from "react-native";
 import { ColorPalete } from "../../../../constants/color-palete";
 

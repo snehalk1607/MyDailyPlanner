@@ -1,31 +1,42 @@
-
-import {Image, Text, TouchableHighlight, TouchableOpacity, View } from 'react-native';
-import { SwipeViewStyles, TaskCardStyles } from './task-card.styles';
+/**
+ * fileName: task-card.component.tsx
+ * description: This files returns individual card of tasks with details to view tasklist screen
+ */
 import React from 'react';
+import {Image, Text, TouchableHighlight, TouchableOpacity, View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { useDispatch } from 'react-redux';
+
+import { SwipeViewStyles, TaskCardStyles } from './task-card.styles';
 import { CustomCheckBox } from './checkbox.component';
 import { EditIcon } from '../../../../assets';
-import { useNavigation } from '@react-navigation/native';
 import { ROOT_NAVIGATOR_SCREENS } from '../../../router.enum';
 import { DELETE_TASK, UPDATE_TASK } from '../../../store/action.types';
-import { useDispatch } from 'react-redux';
 import { LabelsResource } from '../../../../constants/labels-resource';
 import { PRIORITY_LEVELS } from '../../add-new-task/add-edit-task.types';
+import { Task } from '../../../services/task.types';
+import { ROOT_NAVIGATION_PARAMS } from '../../../router';
 
-
-export const TaskCard = (props) => {
+/**
+ * @export
+ * @function TaskCard
+ * @description It returns single card for a task with it's details
+ */
+export const TaskCard = (props: {task: Task}): React.ReactNode => {
     const {title, description, dueDate, priority, id, isComplete} = props.task;
     const navigation = useNavigation();
     const styles = TaskCardStyles;
 
     const getPriorityText = (key: number) => {
         return key === 1 ? PRIORITY_LEVELS.HIGH : key === 2 ? PRIORITY_LEVELS.MEDIUM : PRIORITY_LEVELS.LOW;
-    }
+    };
+
     return (
        <TouchableHighlight style ={styles.cardRootView}>
         <View style = {styles.cardContentView}>
         <View style={styles.flexDirectionRow} >
         <Text style={styles.taskTitle}>{title}</Text>
-        <TouchableOpacity hitSlop={{bottom: 50, top: 50, left: 50, right: 20 }} onPress={() => navigation.navigate(ROOT_NAVIGATOR_SCREENS.ADD_EDIT_TASK, {task: props.task, action: UPDATE_TASK})}>
+        <TouchableOpacity hitSlop={{bottom: 50, top: 50, left: 50, right: 20 }} onPress={() => navigation.navigate<ROOT_NAVIGATION_PARAMS["ADD_EDIT_TASK"]>(ROOT_NAVIGATOR_SCREENS.ADD_EDIT_TASK, {task: props.task, action: UPDATE_TASK})}>
         <Image source={EditIcon} style={{alignSelf:'flex-end', width: 20, height: 20, marginBottom: 10}}  />
         </TouchableOpacity>
         </View>
@@ -39,10 +50,15 @@ export const TaskCard = (props) => {
         </View>
         </View>
        </TouchableHighlight>
-    )
-}
+    );
+};
 
-export const SwipeToDelete = (props) => {
+/**
+ * @export
+ * @function SwipeToDelete
+ * @description It returns function to swipe a card to delete
+ */
+export const SwipeToDelete = (props: {id: Pick<Task,'id'>}): React.ReactNode => {
     const styles = SwipeViewStyles;
     const dispatch = useDispatch();
     return (
@@ -52,5 +68,5 @@ export const SwipeToDelete = (props) => {
           })}>           
             <Text style={styles.deleteText}>{LabelsResource.TASKLIST_ADD_EDIT_SCREEN_DELETE}</Text>           
         </TouchableOpacity>
-    )
-}
+    );
+};

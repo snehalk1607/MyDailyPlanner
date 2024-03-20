@@ -2,11 +2,17 @@ import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import { ViewTaskList } from './screens/view-task-list/view-tasklist.screen';
 import { AddOrEditTask } from './screens/add-new-task/add-edit-task.screen';
-import { NativeStackView } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { ROOT_NAVIGATOR_SCREENS } from './router.enum';
+import { Task } from './services/task.types';
+import { UPDATE_TASK } from './store/action.types';
 
-const Stack = createNativeStackNavigator();
+ export type ROOT_NAVIGATION_PARAMS = {
+  VIEW_TASK_LIST : {task: Task, action: typeof UPDATE_TASK},
+  ADD_EDIT_TASK : {task: Task, action: typeof UPDATE_TASK}
+};
+
+const Stack = createNativeStackNavigator<ROOT_NAVIGATION_PARAMS>();
 const {VIEW_TASK_LIST, ADD_EDIT_TASK} = ROOT_NAVIGATOR_SCREENS;
 
 export const RootRouter = () => (

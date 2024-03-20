@@ -1,3 +1,7 @@
+/**
+ * fileName: color-palete.ts
+ * description: Common file to use uniform colors aross application
+ */
 
 export const ColorPalete = {
     WHITE : 'white',
