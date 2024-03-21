@@ -1,12 +1,12 @@
 import React from 'react';
 import NetInfo, {NetInfoState} from '@react-native-community/netinfo';
-import { Alert } from 'react-native';
-import Toast from 'react-native-toast-message';
+import { Alert, AlertStatic } from 'react-native';
+import { AlertType } from 'react-native';
 
 export const NetworkContext = React.createContext({isConnected: true});
 
-export class NetworkProvider extends React.PureComponent<{}, {isConnected: boolean}> {
-  constructor(props: {}) {
+export class NetworkProvider extends React.PureComponent<{children: any }, {isConnected: boolean}> {
+  constructor(props: { children: any; } | Readonly<{ children: any; }>) {
     super(props);
     this.state = {
       isConnected: true
@@ -23,11 +23,11 @@ export class NetworkProvider extends React.PureComponent<{}, {isConnected: boole
         
   render() {
     return <NetworkContext.Provider value={this.state}>
-      {!this.state.isConnected ?  Alert.alert(
-        'Your seem to be offline!',
-        'Please continue, transactions will sync once device is online.',
+      {!this.state.isConnected &&  Alert.alert(
+        'Your seem offline!',
+        'Please continue, tasks will sync once device is online.',
         [{ text: 'OK' }]
-      ): null }
+      )}
       {this.props.children}
       </NetworkContext.Provider>;
   }

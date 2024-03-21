@@ -12,13 +12,15 @@ import { TaskListImage } from '../../../assets';
 import { LabelsResource } from '../../../constants/labels-resource';
 import { SwipeToDelete, TaskCard } from './components/task-card.component';
 import { useNavigation } from '@react-navigation/native';
-import { ROOT_NAVIGATOR_SCREENS } from '../../router.enum';
+import { ROOT_NAVIGATOR_SCREENS, TaskListParamList } from '../../router.types';
 import { store } from '../../store/store';
 import { ADD_TASK} from '../../store/action.types';
 import {SwipeListView} from 'react-native-swipe-list-view';
 import { Task } from '../../services/task.types';
 import { AppConstant } from '../../../app.constant';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
+type ViewTaskListNavigationType = NativeStackScreenProps<TaskListParamList, 'ADD_EDIT_TASK'>;
 
 /**
  * @export
@@ -26,7 +28,7 @@ import { AppConstant } from '../../../app.constant';
  * @description It returns list of tasks
  */
 export const ViewTaskList = (): React.ReactElement => {
-    const navigation = useNavigation();
+    const navigation = useNavigation<ViewTaskListNavigationType>();
     const styles = viewTaskListStyles;
     const PAGE_OFFSET = AppConstant.LAZY_LOADING_PAGE_OFFSET;
     const taskList: Task[] = useSelector(() => store.getState().taskList);
@@ -46,7 +48,7 @@ export const ViewTaskList = (): React.ReactElement => {
 
     const AddNewTaskButton = (): React.ReactNode => {
         return (          
-             <TouchableOpacity style={styles.footer} onPress={() => navigation.navigate(ROOT_NAVIGATOR_SCREENS.ADD_EDIT_TASK, {task: {}, action: ADD_TASK})} >
+             <TouchableOpacity style={styles.footer} onPress={() => navigation.navigation.navigate('ADD_EDIT_TASK', {task: {}, action: ADD_TASK})} >
                 <Text style={styles.addNewTaskText}>{LabelsResource.TASKLIST_ADD_TASK_BUTTON}</Text>
             </TouchableOpacity>        
         )};
@@ -61,7 +63,7 @@ export const ViewTaskList = (): React.ReactElement => {
 
     const getSortedData = (): Task[] => {
      const tempList = taskList;
-     const sortedData =   sortingFlag.sortByDate ?  tempList.sort((a: Task, b: Task) => new Date(b.dueDate) - new Date(a.dueDate)): 
+     const sortedData =   sortingFlag.sortByDate ?  tempList.sort((a, b) => new Date(b.dueDate).valueOf() - new Date(a.dueDate).valueOf()): 
      sortingFlag.sortByPriority ?  tempList.sort((a, b) => a.priority - b.priority)  : taskList;
      return sortedData;
     };
@@ -83,6 +85,7 @@ export const ViewTaskList = (): React.ReactElement => {
             </View>             
             <SwipeListView
             showsVerticalScrollIndicator={false}
+            //for lazy loading of the list
              data={getSortedData().slice(0, pageLimit)} 
              onEndReachedThreshold={0.2}
              onEndReached={() => {setPageLimit(pageLimit + PAGE_OFFSET)}}

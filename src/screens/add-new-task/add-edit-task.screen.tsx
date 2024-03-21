@@ -10,17 +10,17 @@ import { useDispatch } from 'react-redux';
 import { Text, View } from 'react-native';
 import * as Yup from 'yup';
 import Toast from 'react-native-toast-message';
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 
 import { CustomDatePicker, CustomDropDown, FieldLabel } from './components/form-components';
 import { AddOrEditTaskStyles } from './add-edit-task.styles';
 import { LabelsResource } from '../../../constants/labels-resource';
 import { UPDATE_TASK } from '../../store/action.types';
 import { Task } from '../../services/task.types';
-import { RootStackParamListTypes } from '../../router';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { TaskListParamList } from '../../router.types';
 
 type YupObject = Pick<Task, 'title' | 'description' | 'dueDate' | 'priority'>;
+type AddOrEditTaskRouteProps = RouteProp<TaskListParamList, 'ADD_EDIT_TASK'>
 
 const validationSchema = Yup.object().shape({
     title: Yup.string().required('Please fill this field'),
@@ -34,10 +34,10 @@ const validationSchema = Yup.object().shape({
  * @function AddOrEditTask
  * @description It renders complete form consolidating form components
  */
-export const AddOrEditTask = (_: NativeStackScreenProps<RootStackParamListTypes>): React.ReactElement => {
+export const AddOrEditTask = (): React.ReactElement => {
     const styles = AddOrEditTaskStyles; 
     const navigation = useNavigation();
-    const {task, action} = useRoute()?.params;
+    const {task, action} = useRoute<AddOrEditTaskRouteProps>()?.params;
     const dispatch = useDispatch();
     const isEditScreen = action === UPDATE_TASK;
 

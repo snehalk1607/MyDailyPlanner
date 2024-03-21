@@ -7,7 +7,7 @@ const initialState:{ taskList: Task[]} = {
     taskList : []
 }
 
-export const ManageTaskReducer = (state = initialState, action: {type: string, payload: Task & number}) => {
+export const ManageTaskReducer = (state = initialState, action: {type: string, payload: Task }) => {
     const {type, payload} = action; 
     switch (type) {
         case GET_TASKS:
@@ -67,9 +67,10 @@ export const ManageTaskReducer = (state = initialState, action: {type: string, p
   return [...newArray];               
 }
 
-function deleteTaskToRedux(state: Task[], id: number): Task[]{
-  var index = state.findIndex(item => item.id === id);
-   TaskServices.deleteTask(id);
+function deleteTaskToRedux(state: Task[], payload: Pick<Task, 'id'>): Task[]{
+  console.log('payload', payload.id);
+  var index = state.findIndex(item => item.id === payload.id);
+   TaskServices.deleteTask(payload.id);
    (state.splice(index, 1));
    return [...state];
 }

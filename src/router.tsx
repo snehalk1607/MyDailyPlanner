@@ -8,13 +8,9 @@ import { NavigationContainer } from '@react-navigation/native';
 
 import { ViewTaskList } from './screens/view-task-list/view-tasklist.screen';
 import { AddOrEditTask } from './screens/add-new-task/add-edit-task.screen';
-import { ROOT_NAVIGATOR_SCREENS } from './router.enum';
-import { Task } from './services/task.types';
+import { ROOT_NAVIGATOR_SCREENS, TaskListParamList } from './router.types';
 
-type payload = {task: Task; action: string};
-
-export type RootStackParamListTypes = Record<ROOT_NAVIGATOR_SCREENS, payload>
-const Stack = createNativeStackNavigator<RootStackParamListTypes>();
+const Stack = createNativeStackNavigator<TaskListParamList>();
 const {VIEW_TASK_LIST, ADD_EDIT_TASK} = ROOT_NAVIGATOR_SCREENS;
 
 export const RootRouter = (): React.ReactElement => (    

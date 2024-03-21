@@ -10,11 +10,14 @@ import { useDispatch } from 'react-redux';
 import { SwipeViewStyles, TaskCardStyles } from './task-card.styles';
 import { CustomCheckBox } from './checkbox.component';
 import { EditIcon } from '../../../../assets';
-import { ROOT_NAVIGATOR_SCREENS } from '../../../router.enum';
+import { ROOT_NAVIGATOR_SCREENS, TaskListParamList } from '../../../router.types';
 import { DELETE_TASK, UPDATE_TASK } from '../../../store/action.types';
 import { LabelsResource } from '../../../../constants/labels-resource';
 import { PRIORITY_LEVELS } from '../../add-new-task/add-edit-task.types';
 import { Task } from '../../../services/task.types';
+import { NativeStackScreenProps } from '@react-navigation/native-stack/lib/typescript/src/types';
+
+type TaskCardParamsList = NativeStackScreenProps<TaskListParamList, 'ADD_EDIT_TASK'>;
 
 /**
  * @export
@@ -23,10 +26,10 @@ import { Task } from '../../../services/task.types';
  */
 export const TaskCard = (props: {task: Task}): React.ReactNode => {
     const {title, description, dueDate, priority, id, isComplete} = props.task;
-    const navigation = useNavigation();
+    const navigation = useNavigation<TaskCardParamsList>();
     const styles = TaskCardStyles;
 
-    const getPriorityText = (key: number) => {
+    const getPriorityText = (key: number): PRIORITY_LEVELS => {
         return key === 1 ? PRIORITY_LEVELS.HIGH : key === 2 ? PRIORITY_LEVELS.MEDIUM : PRIORITY_LEVELS.LOW;
     };
 
@@ -35,7 +38,7 @@ export const TaskCard = (props: {task: Task}): React.ReactNode => {
         <View style = {styles.cardContentView}>
         <View style={styles.flexDirectionRow} >
         <Text style={styles.taskTitle}>{title}</Text>
-        <TouchableOpacity hitSlop={{bottom: 50, top: 50, left: 50, right: 20 }} onPress={() => navigation.navigate(ROOT_NAVIGATOR_SCREENS.ADD_EDIT_TASK, {task: props.task, action: UPDATE_TASK})}>
+        <TouchableOpacity hitSlop={{bottom: 50, top: 50, left: 50, right: 20 }} onPress={() => navigation.navigation.navigate(ROOT_NAVIGATOR_SCREENS.ADD_EDIT_TASK, {task: props.task, action: UPDATE_TASK})}>
         <Image source={EditIcon} style={{alignSelf:'flex-end', width: 20, height: 20, marginBottom: 10}}  />
         </TouchableOpacity>
         </View>
@@ -63,7 +66,7 @@ export const SwipeToDelete = (props: {id: number}): React.ReactNode => {
     return (
         <TouchableOpacity style={styles.rootView} onPress={() => dispatch({
             type: DELETE_TASK,
-            payload: props.id
+            payload: {id : props.id}
           })}>           
             <Text style={styles.deleteText}>{LabelsResource.TASKLIST_ADD_EDIT_SCREEN_DELETE}</Text>           
         </TouchableOpacity>
