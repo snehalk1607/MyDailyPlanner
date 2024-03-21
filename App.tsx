@@ -3,7 +3,7 @@
  * description: This is the main component of the application
  */
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import {AppState, SafeAreaView} from 'react-native';
 import { Provider } from 'react-redux'
 
@@ -13,7 +13,7 @@ import { TaskServices } from './src/services/tasks.services';
 import { SET_TASKS } from './src/store/action.types';
 import { ColorPalete } from './constants/color-palete';
 import { NetworkProvider } from './src/providers/network.provider';
-import { EmptyTask, Task } from './src/services/task.types';
+import { Task } from './src/services/task.types';
 
 /**
  * @export

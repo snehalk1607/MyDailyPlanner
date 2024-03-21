@@ -1,10 +1,19 @@
+/**
+ * fileName: network.provider.tsx
+ * description: This file provides context to listen to network change in the application
+ */
+
 import React from 'react';
 import NetInfo, {NetInfoState} from '@react-native-community/netinfo';
-import { Alert, AlertStatic } from 'react-native';
-import { AlertType } from 'react-native';
+import { Alert } from 'react-native';
 
 export const NetworkContext = React.createContext({isConnected: true});
 
+/**
+ * @export
+ * @class NetworkProvider
+ * @description Network Provider to get network connected value in the application
+ */
 export class NetworkProvider extends React.PureComponent<{children: any }, {isConnected: boolean}> {
   constructor(props: { children: any; } | Readonly<{ children: any; }>) {
     super(props);
@@ -31,4 +40,4 @@ export class NetworkProvider extends React.PureComponent<{children: any }, {isCo
       {this.props.children}
       </NetworkContext.Provider>;
   }
-}
+};

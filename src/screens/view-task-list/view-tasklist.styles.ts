@@ -1,6 +1,10 @@
+/**
+ * fileName: view-tasklist.styles.ts
+ * description: Stylesheet for view tasklist screen
+ */
+
 import { StyleSheet } from "react-native"
 import { ColorPalete } from "../../../constants/color-palete";
-
 
 export const viewTaskListStyles =
     StyleSheet.create({

@@ -3,7 +3,6 @@
  * description: Stylesheet for add/ edit task list screen
  */
 
-
 import { StyleSheet } from "react-native";
 import { ColorPalete } from "../../../../constants/color-palete";
 

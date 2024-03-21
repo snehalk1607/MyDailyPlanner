@@ -7,7 +7,7 @@ export enum ROOT_NAVIGATOR_SCREENS {
 
 type EmptyObject = {
     [K in any] : never
-}
+};
 
 type payload = {task: Task | EmptyObject; action: string};
 

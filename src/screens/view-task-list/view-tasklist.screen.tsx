@@ -3,7 +3,7 @@
  * description: This file renders list of tasks
  */
 
-import React, { useEffect, useState } from 'react';
+import React, {useState } from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { useSelector } from 'react-redux';
 
@@ -12,15 +12,15 @@ import { TaskListImage } from '../../../assets';
 import { LabelsResource } from '../../../constants/labels-resource';
 import { SwipeToDelete, TaskCard } from './components/task-card.component';
 import { useNavigation } from '@react-navigation/native';
-import { ROOT_NAVIGATOR_SCREENS, TaskListParamList } from '../../router.types';
+import { TaskListParamList } from '../../router.types';
 import { store } from '../../store/store';
 import { ADD_TASK} from '../../store/action.types';
 import {SwipeListView} from 'react-native-swipe-list-view';
 import { Task } from '../../services/task.types';
 import { AppConstant } from '../../../app.constant';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
-type ViewTaskListNavigationType = NativeStackScreenProps<TaskListParamList, 'ADD_EDIT_TASK'>;
+type ViewTaskListNavigationType = NativeStackNavigationProp<TaskListParamList, 'ADD_EDIT_TASK'>;
 
 /**
  * @export
@@ -48,7 +48,7 @@ export const ViewTaskList = (): React.ReactElement => {
 
     const AddNewTaskButton = (): React.ReactNode => {
         return (          
-             <TouchableOpacity style={styles.footer} onPress={() => navigation.navigation.navigate('ADD_EDIT_TASK', {task: {}, action: ADD_TASK})} >
+             <TouchableOpacity style={styles.footer} onPress={() => navigation.navigate('ADD_EDIT_TASK', {task: {}, action: ADD_TASK})} >
                 <Text style={styles.addNewTaskText}>{LabelsResource.TASKLIST_ADD_TASK_BUTTON}</Text>
             </TouchableOpacity>        
         )};

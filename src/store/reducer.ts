@@ -5,7 +5,7 @@ import { ADD_TASK, DELETE_TASK, GET_TASKS, MARK_TASK_COMPLETE, SET_TASKS, UPDATE
 
 const initialState:{ taskList: Task[]} = {
     taskList : []
-}
+};
 
 export const ManageTaskReducer = (state = initialState, action: {type: string, payload: Task }) => {
     const {type, payload} = action; 
@@ -57,7 +57,7 @@ export const ManageTaskReducer = (state = initialState, action: {type: string, p
    TaskServices.addTask(modifyPayload);
   state = [...taskList, modifyPayload];
   return [...state];
-}
+};
 
  function updateTaskToRedux(state: Task[], payload: Task):Task[]{
  var index = state.findIndex(item => item.id === payload.id);
@@ -65,7 +65,7 @@ export const ManageTaskReducer = (state = initialState, action: {type: string, p
    TaskServices.updateTask(payload);
   newArray = [...state.slice(0, index), payload,...state.slice(index + 1)];
   return [...newArray];               
-}
+};
 
 function deleteTaskToRedux(state: Task[], payload: Pick<Task, 'id'>): Task[]{
   console.log('payload', payload.id);
@@ -73,11 +73,11 @@ function deleteTaskToRedux(state: Task[], payload: Pick<Task, 'id'>): Task[]{
    TaskServices.deleteTask(payload.id);
    (state.splice(index, 1));
    return [...state];
-}
+};
 
 function markTaskCompleteToRedux(state: Task[], payload: Pick<Task, 'id' | 'isComplete'>): Task[]{
   var index = state.findIndex(item => item.id === payload.id);
   TaskServices.updateCompletionOfTask(payload);
   (state[index].isComplete = !payload.isComplete);
   return [...state];
-}
+};

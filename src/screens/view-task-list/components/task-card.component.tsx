@@ -15,9 +15,9 @@ import { DELETE_TASK, UPDATE_TASK } from '../../../store/action.types';
 import { LabelsResource } from '../../../../constants/labels-resource';
 import { PRIORITY_LEVELS } from '../../add-new-task/add-edit-task.types';
 import { Task } from '../../../services/task.types';
-import { NativeStackScreenProps } from '@react-navigation/native-stack/lib/typescript/src/types';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack/lib/typescript/src/types';
 
-type TaskCardParamsList = NativeStackScreenProps<TaskListParamList, 'ADD_EDIT_TASK'>;
+type TaskCardParamsList = NativeStackNavigationProp<TaskListParamList, 'ADD_EDIT_TASK'>;
 
 /**
  * @export
@@ -38,7 +38,7 @@ export const TaskCard = (props: {task: Task}): React.ReactNode => {
         <View style = {styles.cardContentView}>
         <View style={styles.flexDirectionRow} >
         <Text style={styles.taskTitle}>{title}</Text>
-        <TouchableOpacity hitSlop={{bottom: 50, top: 50, left: 50, right: 20 }} onPress={() => navigation.navigation.navigate(ROOT_NAVIGATOR_SCREENS.ADD_EDIT_TASK, {task: props.task, action: UPDATE_TASK})}>
+        <TouchableOpacity hitSlop={{bottom: 50, top: 50, left: 50, right: 20 }} onPress={() => navigation.navigate(ROOT_NAVIGATOR_SCREENS.ADD_EDIT_TASK, {task: props.task, action: UPDATE_TASK})}>
         <Image source={EditIcon} style={{alignSelf:'flex-end', width: 20, height: 20, marginBottom: 10}}  />
         </TouchableOpacity>
         </View>
