@@ -12,6 +12,7 @@ import { store } from './src/store/store';
 import { TaskServices } from './src/services/tasks.services';
 import { SET_TASKS } from './src/store/action.types';
 import { ColorPalete } from './constants/color-palete';
+import { NetworkProvider } from './src/providers/network.provider';
 
 /**
  * @export
@@ -30,9 +31,13 @@ const App: React.FC = () => {
 
   return (
     <Provider store= {store}>
-    <SafeAreaView style={{ backgroundColor: ColorPalete.BLUE, flex:1}}>     
-       <RootRouter/>       
+    <NetworkProvider>
+    <SafeAreaView style={{ backgroundColor: ColorPalete.BLUE, flex:1}}> 
+    {/* <NetworkProvider>    */}
+       <RootRouter/> 
+       {/* </NetworkProvider>        */}
     </SafeAreaView>
+    </NetworkProvider>
     </Provider>   
   );
 }

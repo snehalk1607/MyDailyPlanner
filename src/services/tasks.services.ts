@@ -2,8 +2,7 @@
  * fileName: tasks.services.ts
  * description: This file has all services for API calls to manage transactions
  */
-
-import {  FIREBASE_DB_COLLECTION, FIREBASE_DB_URL } from "../../app.constants";
+import { AppConstant } from './../../app.constant';
 import { firebase } from '@react-native-firebase/database';
 import { FireBaseResponse, Task } from "./task.types";
 
@@ -13,8 +12,8 @@ import { FireBaseResponse, Task } from "./task.types";
  * @description It constitutes of a list fetch, create, update and delete services
  */
 export class TaskServices {
-    private static readonly DB_URL = FIREBASE_DB_URL;   
-    private static readonly DB_COLLECTION = FIREBASE_DB_COLLECTION; 
+    private static readonly DB_URL = AppConstant.FIREBASE_DB_URL;   
+    private static readonly DB_COLLECTION = AppConstant.FIREBASE_DB_COLLECTION; 
     public static readonly DB_INIT = firebase.app().database(this.DB_URL);
 
    public static async fetchData(): Promise<FireBaseResponse> {

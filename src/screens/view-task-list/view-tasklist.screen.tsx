@@ -17,6 +17,7 @@ import { store } from '../../store/store';
 import { ADD_TASK} from '../../store/action.types';
 import {SwipeListView} from 'react-native-swipe-list-view';
 import { Task } from '../../services/task.types';
+import { AppConstant } from '../../../app.constant';
 
 
 /**
@@ -27,18 +28,13 @@ import { Task } from '../../services/task.types';
 export const ViewTaskList = (): React.ReactElement => {
     const navigation = useNavigation();
     const styles = viewTaskListStyles;
-    const taskList: Task[] = useSelector(() => store.getState().taskList)
-    const [sortByDate, setSortByDate] = useState(false);
-    const [sortByPriority, setSortByPriority] = useState(false);
+    const PAGE_OFFSET = AppConstant.LAZY_LOADING_PAGE_OFFSET;
+    const taskList: Task[] = useSelector(() => store.getState().taskList);
+    const [pageLimit, setPageLimit] = useState(PAGE_OFFSET);
     const [sortingFlag, updateSortingFlag] = useState<{sortByDate: boolean, sortByPriority: boolean }>({
         sortByDate : false,
         sortByPriority: false
     });
-
-
-    useEffect(() => {
-        getSortedData();
-    }, [sortByDate, sortByPriority])
 
     const HeaderComponent = (): React.ReactNode => {
         return (
@@ -87,7 +83,9 @@ export const ViewTaskList = (): React.ReactElement => {
             </View>             
             <SwipeListView
             showsVerticalScrollIndicator={false}
-             data={getSortedData()} 
+             data={getSortedData().slice(0, pageLimit)} 
+             onEndReachedThreshold={0.2}
+             onEndReached={() => {setPageLimit(pageLimit + PAGE_OFFSET)}}
              style={{marginBottom: 50}}
              renderItem={({item}) => <TaskCard task={item}/>}  
              ListEmptyComponent={() => EmptyList()}
