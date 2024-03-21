@@ -6,6 +6,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { useSelector } from 'react-redux';
+
 import { viewTaskListStyles } from './view-tasklist.styles';
 import { TaskListImage } from '../../../assets';
 import { LabelsResource } from '../../../constants/labels-resource';
@@ -15,15 +16,21 @@ import { ROOT_NAVIGATOR_SCREENS } from '../../router.enum';
 import { store } from '../../store/store';
 import { ADD_TASK} from '../../store/action.types';
 import {SwipeListView} from 'react-native-swipe-list-view';
+import { Task } from '../../services/task.types';
 
 
-export const ViewTaskList = () => {
+/**
+ * @export
+ * @function ViewTaskList
+ * @description It returns list of tasks
+ */
+export const ViewTaskList = (): React.ReactElement => {
     const navigation = useNavigation();
     const styles = viewTaskListStyles;
-    const taskList = useSelector(() => store.getState().taskList)
+    const taskList: Task[] = useSelector(() => store.getState().taskList)
     const [sortByDate, setSortByDate] = useState(false);
     const [sortByPriority, setSortByPriority] = useState(false);
-    const [sortingFlag, updateSortingFlag] = useState ({
+    const [sortingFlag, updateSortingFlag] = useState<{sortByDate: boolean, sortByPriority: boolean }>({
         sortByDate : false,
         sortByPriority: false
     });
@@ -33,35 +40,32 @@ export const ViewTaskList = () => {
         getSortedData();
     }, [sortByDate, sortByPriority])
 
-    const HeaderComponent = () => {
+    const HeaderComponent = (): React.ReactNode => {
         return (
             <View style={styles.header}>     
             <Text style={styles.headerText}>{LabelsResource.TASKLIST_HEADER_USER}</Text>
             <Text style={[styles.headerText, {textAlign:'center'}]}>{LabelsResource.TASKLIST_HEADER_WELCOME_TEXT}</Text>        
             </View>
-        )
-    };
+        )};
 
-    const AddNewTaskButton = () => {
+    const AddNewTaskButton = (): React.ReactNode => {
         return (          
              <TouchableOpacity style={styles.footer} onPress={() => navigation.navigate(ROOT_NAVIGATOR_SCREENS.ADD_EDIT_TASK, {task: {}, action: ADD_TASK})} >
                 <Text style={styles.addNewTaskText}>{LabelsResource.TASKLIST_ADD_TASK_BUTTON}</Text>
             </TouchableOpacity>        
-        )
-    };
+        )};
 
-    const EmptyList = () => {
+    const EmptyList = (): React.ReactNode => {
         return (
             <View style={styles.emptyListView}>
                 <Image source={TaskListImage}/>
                 <Text style={styles.emptyListText}>{LabelsResource.TASKLIST_NO_TASKS}</Text>
             </View>
-        )
-    }
+        )};
 
-    const getSortedData = () => {
+    const getSortedData = (): Task[] => {
      const tempList = taskList;
-     const sortedData =   sortingFlag.sortByDate ?  tempList.sort((a, b) => new Date(b.dueDate) - new Date(a.dueDate)): 
+     const sortedData =   sortingFlag.sortByDate ?  tempList.sort((a: Task, b: Task) => new Date(b.dueDate) - new Date(a.dueDate)): 
      sortingFlag.sortByPriority ?  tempList.sort((a, b) => a.priority - b.priority)  : taskList;
      return sortedData;
     };
@@ -95,5 +99,5 @@ export const ViewTaskList = () => {
             </SwipeListView>          
             {AddNewTaskButton()}
         </View>
-    )
-}
+    );
+};

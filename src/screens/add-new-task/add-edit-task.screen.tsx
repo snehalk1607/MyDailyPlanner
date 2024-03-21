@@ -17,6 +17,8 @@ import { AddOrEditTaskStyles } from './add-edit-task.styles';
 import { LabelsResource } from '../../../constants/labels-resource';
 import { UPDATE_TASK } from '../../store/action.types';
 import { Task } from '../../services/task.types';
+import { RootStackParamListTypes } from '../../router';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 type YupObject = Pick<Task, 'title' | 'description' | 'dueDate' | 'priority'>;
 
@@ -32,10 +34,10 @@ const validationSchema = Yup.object().shape({
  * @function AddOrEditTask
  * @description It renders complete form consolidating form components
  */
-export const AddOrEditTask = (): React.ReactElement => {
+export const AddOrEditTask = (_: NativeStackScreenProps<RootStackParamListTypes>): React.ReactElement => {
     const styles = AddOrEditTaskStyles; 
     const navigation = useNavigation();
-    const {task, action}= useRoute().params;
+    const {task, action} = useRoute()?.params;
     const dispatch = useDispatch();
     const isEditScreen = action === UPDATE_TASK;
 
@@ -53,7 +55,7 @@ export const AddOrEditTask = (): React.ReactElement => {
         dispatch({
           type: action,
           payload: isEditScreen ? {...values, id: task.id} : {...values}
-        });     
+        });   
         Toast.show({ type: 'success', text1: isEditScreen ? LabelsResource.TASKLIST_UPDATED_TOAST_MESSAGE : LabelsResource.TASKLIST_ADDED_TOAST_MESSAGE, position: 'bottom', bottomOffset: 70, text1Style: {fontSize: 15}})
         setTimeout(() => {
           navigation.goBack();

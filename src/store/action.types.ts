@@ -1,3 +1,8 @@
+/**
+ * fileName: action.types.ts
+ * description: This file has list of actions for redux
+ */
+
 
 export const ADD_TASK = 'ADD_TASK';
 export const UPDATE_TASK = 'UPDATE_TASK';

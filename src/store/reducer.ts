@@ -1,12 +1,13 @@
 
+import { Task } from "../services/task.types";
 import { TaskServices } from "../services/tasks.services";
 import { ADD_TASK, DELETE_TASK, GET_TASKS, MARK_TASK_COMPLETE, SET_TASKS, UPDATE_TASK } from "./action.types";
 
-const initialState = {
-    taskList: []
+const initialState:{ taskList: Task[]} = {
+    taskList : []
 }
 
-export const ManageTaskReducer = (state = initialState, action: any) => {
+export const ManageTaskReducer = (state = initialState, action: {type: string, payload: Task & number}) => {
     const {type, payload} = action; 
     switch (type) {
         case GET_TASKS:
@@ -49,31 +50,33 @@ export const ManageTaskReducer = (state = initialState, action: any) => {
         }
 };
 
-function addTaskToRedux(taskList, payload){
+ function addTaskToRedux(taskList: Task[], payload: Task): Task[]{
   const id = Math.floor(1000 + Math.random() * 9000);
-  let state = [];
+  let state:Task[] = [];
   const modifyPayload = {...payload, id: id , isComplete: false};
-  TaskServices.addTask(modifyPayload).then(
-   state = [...taskList, modifyPayload]
-  );
+   TaskServices.addTask(modifyPayload);
+  state = [...taskList, modifyPayload];
   return [...state];
 }
 
-function updateTaskToRedux(state, payload){
+ function updateTaskToRedux(state: Task[], payload: Task):Task[]{
  var index = state.findIndex(item => item.id === payload.id);
- let newArray  = [];
-  TaskServices.updateTask(payload).then(newArray = [...state.slice(0, index), payload,...state.slice(index + 1)]);
+ let newArray: Task[]  = [];
+   TaskServices.updateTask(payload);
+  newArray = [...state.slice(0, index), payload,...state.slice(index + 1)];
   return [...newArray];               
 }
 
-function deleteTaskToRedux(state, id){
+function deleteTaskToRedux(state: Task[], id: number): Task[]{
   var index = state.findIndex(item => item.id === id);
-   TaskServices.deleteTask(id).then(state.splice(index, 1));
+   TaskServices.deleteTask(id);
+   (state.splice(index, 1));
    return [...state];
 }
 
-function markTaskCompleteToRedux(state, payload){
+function markTaskCompleteToRedux(state: Task[], payload: Pick<Task, 'id' | 'isComplete'>): Task[]{
   var index = state.findIndex(item => item.id === payload.id);
-  TaskServices.updateCompletionOfTask(payload).then(state[index].isComplete = !payload.isComplete);
+  TaskServices.updateCompletionOfTask(payload);
+  (state[index].isComplete = !payload.isComplete);
   return [...state];
 }

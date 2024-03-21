@@ -11,7 +11,6 @@ import { RootRouter } from './src/router';
 import { store } from './src/store/store';
 import { TaskServices } from './src/services/tasks.services';
 import { SET_TASKS } from './src/store/action.types';
-import { Task } from './src/services/task.types';
 import { ColorPalete } from './constants/color-palete';
 
 /**
@@ -21,7 +20,7 @@ import { ColorPalete } from './constants/color-palete';
  */
 const App: React.FC = () => {
   useEffect(() => {
-    const taskList: Task[] = [];
+    let taskList = [];
     TaskServices.fetchData().then(data => Object.entries(data).map(([_, value]) => {            
           taskList.push(value)
           store.dispatch({type: SET_TASKS, payload: taskList})                   
@@ -35,7 +34,6 @@ const App: React.FC = () => {
        <RootRouter/>       
     </SafeAreaView>
     </Provider>   
-
   );
 }
 

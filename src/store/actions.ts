@@ -23,8 +23,8 @@ export const deleteTask = (id: number) => ({
     payload: id
 });
 
-export const markTaskComplete = (id: number) => ({
+export const markTaskComplete = (payload:  Pick<Task, 'id' | 'isComplete'>) => ({
     type: MARK_TASK_COMPLETE,
-    payload: id
+    payload: payload
 });
 
