@@ -45,13 +45,13 @@ export const CustomDatePicker = (props:{value: string; onChange(_: string): void
        isAndroid && setShowCalendar(false);
     };
    return (
-        <View style={{marginLeft: 20}}>
+        <View style={{marginLeft: 20, marginBottom: 10}}>
         {isAndroid && <Button title={value} onPress={() => setShowCalendar(true)}></Button>}
         {showCalendar &&  <RNDateTimePicker
         mode={'date'}
         minimumDate={new Date('2023-01-01')}
         aria-modal = {false}
-        style={{marginLeft: 18, marginBottom: 14}}
+        style={isAndroid ? {marginLeft: 18} : {marginLeft: 0}}
         collapsable={true}
         value={new Date(selectedDate)}
         onChange={(e, date) => setDateSelection(e, date)}

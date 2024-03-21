@@ -78,4 +78,11 @@ To learn more about React Native, take a look at the following resources:
 - [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
 - [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
 
--testing a new commit
+
+-- Project specific -- 
+
+- Create a local.properties files and add line: sdk.dir = /Users/${User}/Library/Android/sdk for android build opeations
+- To create android build locally use command "npm run android-release" mentioned in package.json file. The keystore folder needed for it is commited along with the code base 
+- This project has patch-package installed for patching breaking changes in the @react-native-community/datetimepicker package. Pactches folder is already committed. If there is any issue then run command: npm patch-package @react-native-community/datetimepicker
+- Only android release application can be built as iOS release application will need certificates to build. 
+- Google-services files for android and iOS both is already committed with the code base, it is needed to integrate firebase services

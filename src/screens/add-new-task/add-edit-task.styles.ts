@@ -23,9 +23,10 @@ export const AddOrEditTaskStyles = StyleSheet.create({
         }, 
         rootView:{
             flex:1,
-            marginVertical: 30, 
-            marginHorizontal: 15, 
-            justifyContent:'center'
+            paddingVertical: 30, 
+            paddingHorizontal: 15, 
+            justifyContent:'center',
+            backgroundColor: ColorPalete.WHITE
         },
         screenHeading:{
              justifyContent: 'center',

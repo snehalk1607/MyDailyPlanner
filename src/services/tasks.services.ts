@@ -21,7 +21,7 @@ export class TaskServices {
           const snapshot = await TaskServices.DB_INIT.ref(this.DB_COLLECTION).once('value');
           return snapshot.val();
         } catch (error) {
-          console.error('Error fetching data:', error);
+          //console.error('Error fetching data:', error);
           throw error;
         }
       }
@@ -29,9 +29,9 @@ export class TaskServices {
       public  static async addTask(payload: Task): Promise<void> {
         try {
            await TaskServices.DB_INIT.ref(`${this.DB_COLLECTION}/task${payload.id}`).set(payload);
-            console.log('added');
+            //console.log('added');
         } catch (error) {
-          console.error('Error fetching data:', error);
+          //console.error('Error fetching data:', error);
           throw error;
         }
       }
@@ -41,9 +41,9 @@ export class TaskServices {
             await TaskServices.DB_INIT.ref(`${this.DB_COLLECTION}/task${payload.id}`)
             .update(payload)
             .then(() => console.log('Data updated.'));
-            console.log('added');
+            //console.log('added');
         } catch (error) {
-          console.error('Error fetching data:', error);
+          //console.error('Error fetching data:', error);
           throw error;
         }
       }
@@ -54,7 +54,7 @@ export class TaskServices {
             .update({isComplete : !payload.isComplete})
             .then(() => console.log('Data updated.'));
         } catch (error) {
-          console.error('Error fetching data:', error);
+          //console.error('Error fetching data:', error);
           throw error;
         }
       }
@@ -65,9 +65,9 @@ export class TaskServices {
         try {
             await TaskServices.DB_INIT.ref(`${this.DB_COLLECTION}/task${id}`)
             .remove()
-            .then(() => console.log('Data removed.'));
+            // .then(() => console.log('Data removed.'));
         } catch (error) {
-          console.error('Error fetching data:', error);
+          //console.error('Error fetching data:', error);
           throw error;
         }
       }
