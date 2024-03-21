@@ -86,3 +86,4 @@ To learn more about React Native, take a look at the following resources:
 - This project has patch-package installed for patching breaking changes in the @react-native-community/datetimepicker package. Pactches folder is already committed. If there is any issue then run command: npm patch-package @react-native-community/datetimepicker
 - Only android release application can be built as iOS release application will need certificates to build. 
 - Google-services files for android and iOS both is already committed with the code base, it is needed to integrate firebase services
+- (open issue with mark task completion)
