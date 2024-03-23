@@ -84,11 +84,12 @@ function deleteTaskToRedux(state: Task[], payload: Pick<Task, 'id'>): Task[]{
 };
 
 function markTaskCompleteToRedux(state: Task[], payload: Pick<Task, 'id' | 'isComplete'>): Task[]{
-  try{
+ try{
+  let taskList = state;
   var index = state.findIndex(item => item.id === payload.id);
   TaskServices.updateCompletionOfTask(payload);
-  state[index].isComplete = !payload.isComplete;
-  return [...state];
-  }
-  catch(error){return [...state]}
+  taskList[index] = {...state[index], isComplete: !payload.isComplete};
+  return [...taskList]; 
+ }
+ catch(error){return [...state]} 
 };

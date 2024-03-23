@@ -54,7 +54,7 @@ export const AddOrEditTask = (): React.ReactElement => {
      Platform.OS === 'android' ? Keyboard.dismiss(): null;
         dispatch({
           type: action,
-          payload: isEditScreen ? {...values, id: task.id} : {...values}
+          payload: isEditScreen ? {...values, id: task.id, isComplete: task.isComplete} : {...values}
         });   
         Toast.show({ type: 'success', text1: isEditScreen ? LabelsResource.TASKLIST_UPDATED_TOAST_MESSAGE : LabelsResource.TASKLIST_ADDED_TOAST_MESSAGE, position: 'bottom', bottomOffset: 70, text1Style: {fontSize: 15}})
         setTimeout(() => {
